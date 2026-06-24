@@ -186,60 +186,64 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
-              <div className="grid lg:grid-cols-3 gap-6 mb-6 animate-slideInLeft items-start">
-                <div className="bg-white rounded-2xl shadow-sm p-5 card-hover border border-unity-gold-border/50">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 bg-unity-gold/10 rounded-full flex items-center justify-center text-unity-gold-dark flex-shrink-0">
-                      <User className="w-6 h-6" />
-                    </div>
-                    <div className="flex-1">
-                      <h2 className="text-lg font-extrabold text-unity-slate mb-2">Customer Profile</h2>
-                      <div className="grid grid-cols-2 gap-3 text-xs">
-                        <div>
-                           <p className="text-unity-slate/50 font-bold uppercase">Segment</p>
-                           <p className="font-semibold text-unity-slate">{mockCustomer.segment}</p>
-                        </div>
-                        <div>
-                           <p className="text-unity-slate/50 font-bold uppercase">Tier</p>
-                           <p className="font-semibold text-unity-gold-dark">{mockCustomer.tier}</p>
-                        </div>
-                        <div>
-                           <p className="text-unity-slate/50 font-bold uppercase">Customer Since</p>
-                           <p className="font-semibold text-unity-slate">{mockCustomer.since}</p>
-                        </div>
-                        <div>
-                           <p className="text-unity-slate/50 font-bold uppercase">CLTV Status</p>
-                           <p className="font-semibold text-emerald-600">Excellent ({cltvScore})</p>
-                        </div>
-                        <div>
-                           <p className="text-unity-slate/50 font-bold uppercase">Digital Index</p>
-                           <p className="font-semibold text-unity-slate">92/100 (High)</p>
-                        </div>
-                        <div>
-                           <p className="text-unity-slate/50 font-bold uppercase">Risk Profile</p>
-                           <p className="font-semibold text-emerald-600">Low Risk</p>
+
+              <div className="grid lg:grid-cols-3 gap-6 mb-6 animate-slideInLeft items-stretch">
+                {/* Column 1 - Customer Profile */}
+                <div className="bg-white rounded-2xl shadow-sm p-5 card-hover border border-unity-gold-border/50 flex flex-col justify-between h-full">
+                  <div>
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="w-12 h-12 bg-unity-gold/10 rounded-full flex items-center justify-center text-unity-gold-dark flex-shrink-0">
+                        <User className="w-6 h-6" />
+                      </div>
+                      <div className="flex-1">
+                        <h2 className="text-lg font-extrabold text-unity-slate mb-2">Customer Profile</h2>
+                        <div className="grid grid-cols-2 gap-3 text-xs">
+                          <div>
+                             <p className="text-unity-slate/50 font-bold uppercase">Segment</p>
+                             <p className="font-semibold text-unity-slate">{mockCustomer.segment}</p>
+                          </div>
+                          <div>
+                             <p className="text-unity-slate/50 font-bold uppercase">Tier</p>
+                             <p className="font-semibold text-unity-gold-dark">{mockCustomer.tier}</p>
+                          </div>
+                          <div>
+                             <p className="text-unity-slate/50 font-bold uppercase">Customer Since</p>
+                             <p className="font-semibold text-unity-slate">{mockCustomer.since}</p>
+                          </div>
+                          <div>
+                             <p className="text-unity-slate/50 font-bold uppercase">CLTV Status</p>
+                             <p className="font-semibold text-emerald-600">Excellent ({cltvScore})</p>
+                          </div>
+                          <div>
+                             <p className="text-unity-slate/50 font-bold uppercase">Digital Index</p>
+                             <p className="font-semibold text-unity-slate">92/100 (High)</p>
+                          </div>
+                          <div>
+                             <p className="text-unity-slate/50 font-bold uppercase">Risk Profile</p>
+                             <p className="font-semibold text-emerald-600">Low Risk</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
- 
-                  <div className="border-t border-gray-100 pt-3">
-                    <h3 className="font-bold text-unity-slate/80 mb-3 text-xs uppercase tracking-wider">Business Behavior & Insight</h3>
-                    <div className="grid grid-cols-3 gap-3">
-                      <div className="bg-gradient-to-br from-amber-50/50 to-orange-50/20 border border-unity-gold-border rounded-lg p-2.5">
-                        <p className="text-[10px] font-bold text-unity-gold-dark mb-1">MoM Growth</p>
-                        <p className="text-xl font-extrabold text-unity-slate">+22%</p>
-                        <p className="text-[9px] text-unity-slate/60">Current Account</p>
-                      </div>
-                      <div className="bg-gradient-to-br from-slate-50 to-[#FAF9F6] border border-slate-200 rounded-lg p-2.5">
-                        <p className="text-[10px] font-bold text-unity-slate/80 mb-1">Avg Balance</p>
-                        <p className="text-xl font-extrabold text-unity-slate">₹3.1L</p>
-                        <p className="text-[9px] text-unity-slate/60">MAB Compliant</p>
-                      </div>
-                      <div className="bg-gradient-to-br from-amber-50/30 to-slate-50 border border-unity-gold-border rounded-lg p-2.5">
-                        <p className="text-[10px] font-bold text-unity-gold-dark mb-1">Product / Customer</p>
-                        <p className="text-xl font-extrabold text-unity-slate">3.0</p>
-                        <p className="text-[9px] text-unity-slate/60">Active CA, FD, OD</p>
+   
+                    <div className="border-t border-gray-100 pt-3">
+                      <h3 className="font-bold text-unity-slate/80 mb-3 text-xs uppercase tracking-wider">Business Behavior & Insight</h3>
+                      <div className="grid grid-cols-3 gap-3">
+                        <div className="bg-gradient-to-br from-amber-50/50 to-orange-50/20 border border-unity-gold-border rounded-lg p-2.5">
+                          <p className="text-[10px] font-bold text-unity-gold-dark mb-1">MoM Growth</p>
+                          <p className="text-xl font-extrabold text-unity-slate">+22%</p>
+                          <p className="text-[9px] text-unity-slate/60">Current Account</p>
+                        </div>
+                        <div className="bg-gradient-to-br from-slate-50 to-[#FAF9F6] border border-slate-200 rounded-lg p-2.5">
+                          <p className="text-[10px] font-bold text-unity-slate/80 mb-1">Avg Balance</p>
+                          <p className="text-xl font-extrabold text-unity-slate">₹3.1L</p>
+                          <p className="text-[9px] text-unity-slate/60">MAB Compliant</p>
+                        </div>
+                        <div className="bg-gradient-to-br from-amber-50/30 to-slate-50 border border-unity-gold-border rounded-lg p-2.5">
+                          <p className="text-[10px] font-bold text-unity-gold-dark mb-1">Product / Customer</p>
+                          <p className="text-xl font-extrabold text-unity-slate">3.0</p>
+                          <p className="text-[9px] text-unity-slate/60">Active CA, FD, OD</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -262,7 +266,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Column 2 - Engagement Momentum + Product Stack */}
-                <div className="flex flex-col gap-6 w-full">
+                <div className="grid grid-rows-[auto_1fr] gap-6 w-full">
                   <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover">
                     <h2 className="text-base font-extrabold text-unity-slate mb-3 uppercase tracking-wider">Engagement Momentum</h2>
                     <div className="grid grid-cols-3 gap-3">
@@ -293,7 +297,7 @@ export default function Dashboard() {
                   </div>
 
                   {/* Product Stack Card */}
-                  <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover">
+                  <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover flex flex-col">
                     <h3 className="font-extrabold text-unity-slate mb-3 text-xs uppercase tracking-wider">Product Stack</h3>
                     <div className="space-y-2">
                       <div className="flex items-center gap-2.5 p-2.5 bg-gradient-to-r from-amber-50/50 to-white rounded-lg border border-unity-gold-border/60">
@@ -331,56 +335,89 @@ export default function Dashboard() {
                 </div>
 
                 {/* Column 3 - Unity SFB Premium Card Flavor */}
-                <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover">
-                  <div className="flex justify-between items-center mb-3">
-                    <h3 className="font-extrabold text-unity-slate text-xs uppercase tracking-wider">Active Credit Card</h3>
-                    <span className="text-[10px] text-unity-slate/50 font-bold uppercase tracking-wider">RuPay Select Credit</span>
-                  </div>
-                  
-                  {/* Visual Card Mockup */}
-                  <div className="w-full aspect-[1.586/1] rounded-xl bg-gradient-to-br from-[#2A3649] via-[#3C4C63] to-[#1C2532] text-white p-4 flex flex-col justify-between shadow-md relative overflow-hidden border border-slate-700/50">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-radial from-[#F5BE18]/15 to-transparent rounded-full -mr-8 -mt-8 pointer-events-none"></div>
-                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-radial from-[#F5BE18]/10 to-transparent rounded-full -ml-8 -mb-8 pointer-events-none"></div>
-                    
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <p className="text-[9px] font-black tracking-wider text-unity-gold uppercase leading-none">Unity Small Finance Bank</p>
-                        <p className="text-[6px] text-white/50 tracking-widest uppercase leading-none mt-1">Pearl Business Credit</p>
-                      </div>
-                      <div className="flex items-center gap-1 bg-white/10 px-1.5 py-0.5 rounded text-[8px] font-bold border border-white/10 text-unity-gold">
-                        <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></span>
-                        ACTIVE
-                      </div>
+                <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover flex flex-col justify-between h-full">
+                  <div>
+                    <div className="flex justify-between items-center mb-3">
+                      <h3 className="font-extrabold text-unity-slate text-xs uppercase tracking-wider">Active Credit Card</h3>
+                      <span className="text-[10px] text-unity-slate/50 font-bold uppercase tracking-wider">RuPay Select Credit</span>
                     </div>
-
-                    {/* Card Chip & Contactless */}
-                    <div className="flex justify-between items-end mt-2">
-                      <div className="w-7 h-5 rounded bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-500 border border-amber-600/30 flex flex-col justify-between p-1">
-                        <div className="flex justify-between h-full">
-                          <div className="w-0.5 h-full bg-amber-900/20"></div>
-                          <div className="w-0.5 h-full bg-amber-900/20"></div>
-                          <div className="w-0.5 h-full bg-amber-900/20"></div>
+                    
+                    {/* Visual Card Mockup */}
+                    <div className="w-full aspect-[1.586/1] rounded-xl bg-gradient-to-br from-[#2A3649] via-[#3C4C63] to-[#1C2532] text-white p-4 flex flex-col justify-between shadow-md relative overflow-hidden border border-slate-700/50">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-radial from-[#F5BE18]/15 to-transparent rounded-full -mr-8 -mt-8 pointer-events-none"></div>
+                      <div className="absolute bottom-0 left-0 w-24 h-24 bg-radial from-[#F5BE18]/10 to-transparent rounded-full -ml-8 -mb-8 pointer-events-none"></div>
+                      
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <p className="text-[9px] font-black tracking-wider text-unity-gold uppercase leading-none">Unity Small Finance Bank</p>
+                          <p className="text-[6px] text-white/50 tracking-widest uppercase leading-none mt-1">Pearl Business Credit</p>
+                        </div>
+                        <div className="flex items-center gap-1 bg-white/10 px-1.5 py-0.5 rounded text-[8px] font-bold border border-white/10 text-unity-gold">
+                          <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></span>
+                          ACTIVE
                         </div>
                       </div>
-                      <svg className="w-4 h-4 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M5 17.5c2.5-2.5 2.5-6.5 0-9M7.5 20c3.5-3.5 3.5-9.5 0-13M10 22.5c4.5-4.5 4.5-12.5 0-17" strokeLinecap="round" />
-                      </svg>
-                    </div>
 
-                    {/* Card Number */}
-                    <div className="mt-3 font-mono text-sm tracking-widest text-white/95">
-                      4321 8901 2345 6789
-                    </div>
-
-                    {/* Cardholder & RuPay Platinum */}
-                    <div className="flex justify-between items-end mt-1">
-                      <div>
-                        <p className="text-[5px] text-white/40 uppercase tracking-widest">Card Holder</p>
-                        <p className="text-[10px] font-bold tracking-wide uppercase text-white/90">Rohan Mehta</p>
+                      {/* Card Chip & Contactless */}
+                      <div className="flex justify-between items-end mt-2">
+                        <div className="w-7 h-5 rounded bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-500 border border-amber-600/30 flex flex-col justify-between p-1">
+                          <div className="flex justify-between h-full">
+                            <div className="w-0.5 h-full bg-amber-900/20"></div>
+                            <div className="w-0.5 h-full bg-amber-900/20"></div>
+                            <div className="w-0.5 h-full bg-amber-900/20"></div>
+                          </div>
+                        </div>
+                        <svg className="w-4 h-4 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <path d="M5 17.5c2.5-2.5 2.5-6.5 0-9M7.5 20c3.5-3.5 3.5-9.5 0-13M10 22.5c4.5-4.5 4.5-12.5 0-17" strokeLinecap="round" />
+                        </svg>
                       </div>
-                      <div className="text-right">
-                        <span className="text-[9px] font-black italic tracking-wide text-white/90">RuPay</span>
-                        <span className="block text-[5.5px] font-bold tracking-wider uppercase text-unity-gold -mt-1">SELECT CREDIT</span>
+
+                      {/* Card Number */}
+                      <div className="mt-3 font-mono text-sm tracking-widest text-white/95">
+                        4321 8901 2345 6789
+                      </div>
+
+                      {/* Cardholder & RuPay Platinum */}
+                      <div className="flex justify-between items-end mt-1">
+                        <div>
+                          <p className="text-[5px] text-white/40 uppercase tracking-widest">Card Holder</p>
+                          <p className="text-[10px] font-bold tracking-wide uppercase text-white/90">Rohan Mehta</p>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-[9px] font-black italic tracking-wide text-white/90">RuPay</span>
+                          <span className="block text-[5.5px] font-bold tracking-wider uppercase text-unity-gold -mt-1">SELECT CREDIT</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Controls & Limits */}
+                  <div className="border-t border-gray-100 pt-4 mt-4 space-y-3 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h4 className="text-[10px] font-bold text-unity-slate/50 uppercase tracking-wider mb-2">Card Limit & Spends</h4>
+                      <div className="space-y-1.5 text-xs">
+                        <div className="flex justify-between">
+                          <span className="text-unity-slate/60">Total Limit</span>
+                          <span className="font-bold text-unity-slate">₹3,00,000</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-unity-slate/60">Utilized Limit</span>
+                          <span className="font-bold text-unity-slate">₹45,000</span>
+                        </div>
+                        <div className="w-full bg-slate-100 rounded-full h-1.5 mt-1">
+                          <div className="bg-unity-gold-dark h-1.5 rounded-full" style={{ width: '15%' }}></div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="border-t border-gray-100/70 pt-3">
+                      <div className="flex justify-between gap-2 text-[10px]">
+                        <button className="flex-1 bg-slate-50 hover:bg-slate-100 text-unity-slate font-bold py-1.5 px-2 rounded border border-slate-200 uppercase tracking-wider text-center transition-colors">
+                          Reset PIN
+                        </button>
+                        <button className="flex-1 bg-red-50 hover:bg-red-100 text-red-600 font-bold py-1.5 px-2 rounded border border-red-200 uppercase tracking-wider text-center transition-colors">
+                          Block Card
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -776,7 +813,13 @@ export default function Dashboard() {
                         </defs>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
                         <XAxis dataKey="month" stroke="#2A3649" fontSize={10} fontWeight="bold" />
-                        <YAxis stroke="#2A3649" fontSize={10} fontWeight="bold" />
+                        <YAxis 
+                          stroke="#2A3649" 
+                          fontSize={10} 
+                          fontWeight="bold" 
+                          tickFormatter={(value) => `₹${(value / 1000)}k`}
+                          width={55}
+                        />
                         <Tooltip 
                           contentStyle={{ background: '#2A3649', border: 'none', borderRadius: '8px', fontSize: '12px' }} 
                           itemStyle={{ color: '#fff' }}
