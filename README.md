@@ -1,4 +1,4 @@
-CBI Customer 360 Platform - https://cbi-cust360.vercel.app/
+Unity Small Finance Bank Customer 360 Platform - [https://cbi-cust360.vercel.app/](https://unity-small-finance-bank-customer-3.vercel.app/)
 
 Tech Stack: React + TypeScript, TailwindCSS v4, Vite, React Router, Lucide Icons
 
