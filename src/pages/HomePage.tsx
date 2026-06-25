@@ -47,13 +47,13 @@ export default function HomePage() {
                     </div>
                     <h3 className="text-2xl font-black text-unity-slate mb-2">Customer 360° Dashboard</h3>
                     <p className="text-unity-slate/80 text-sm mb-4 max-w-2xl">
-                      Unified, real-time analytics portal displaying MSME promoter profile, multi-channel engagement patterns, 
-                      re-investment campaign triggers, and credit portfolio metrics.
+                      Unified, real-time analytics portal displaying the retail customer profile, multi-channel engagement patterns, 
+                      product holdings, spend behaviors, and credit portfolio metrics.
                     </p>
                     
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
                       <div className="bg-white/80 border border-unity-gold-border/60 rounded-xl p-3 shadow-xs">
-                        <p className="text-unity-slate/50 text-[10px] font-bold uppercase">Dynamic CLTV</p>
+                        <p className="text-unity-slate/50 text-[10px] font-bold uppercase">Primary Bank Index</p>
                         <p className="text-base font-extrabold">Active</p>
                       </div>
                       <div className="bg-white/80 border border-unity-gold-border/60 rounded-xl p-3 shadow-xs">
@@ -96,7 +96,7 @@ export default function HomePage() {
                   Loan Journey Simulation
                 </h3>
                 <p className="text-xs text-unity-slate/75 mb-4 leading-relaxed">
-                  Interactive simulation of an MSME customer loan application. Verifies OTP, displays Key Fact Statement 
+                  Interactive simulation of a retail customer Personal Loan (PL) application. Verifies OTP, displays Key Fact Statement 
                   (KFS) guidelines, handles customer queries via AI assistant, and triggers automated instant underwriting.
                 </p>
                 <div className="flex flex-wrap gap-1.5 mb-2">
