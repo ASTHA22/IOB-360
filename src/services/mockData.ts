@@ -56,17 +56,17 @@ export const customerExtended = {
     ewsFlags: []
   },
   persona: 'Digital Savvy Working Woman - Senior Tech Executive',
-  branch: 'Worli Branch, Mumbai',
+  branch: 'Chembur Branch, Mumbai',
   managedBy: {
     name: 'Priyesh Shah',
     phone: '+91 98200 98765'
   },
   demographics: {
-    age: 32,
+    age: 29,
     gender: 'Female',
     occupation: 'Salaried (VP - Technology)',
-    maritalStatus: 'Married',
-    geography: 'Mumbai (Metro - Tier 1, West)',
+    maritalStatus: 'Single',
+    geography: 'Mumbai (Metro - Tier 1, Central/East)',
     walletShare: '78%'
   },
   relationshipMetrics: {
