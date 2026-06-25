@@ -201,105 +201,119 @@ export default function Dashboard() {
 
               <div className="grid lg:grid-cols-3 gap-6 mb-6 animate-slideInLeft items-stretch">
                 {/* Column 1 - Customer Profile & RM Details */}
-                <div className="bg-white rounded-2xl shadow-sm p-5 card-hover border border-unity-gold-border/50 flex flex-col justify-between h-full animate-slideInLeft">
+                <div className="bg-white rounded-2xl shadow-sm p-5 card-hover border border-unity-gold-border/50 flex flex-col h-full animate-slideInLeft justify-between">
                   <div>
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="w-12 h-12 bg-unity-gold/10 rounded-full flex items-center justify-center text-unity-gold-dark flex-shrink-0">
-                        <User className="w-6 h-6" />
+                    {/* Card Header (Icon next to title only) */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-unity-gold/10 rounded-full flex items-center justify-center text-unity-gold-dark flex-shrink-0">
+                        <User className="w-5.5 h-5.5" />
                       </div>
-                      <div className="flex-1">
-                        <h2 className="text-lg font-extrabold text-unity-slate mb-3">Customer Profile</h2>
-                        <div className="space-y-2.5 text-xs">
-                          <div className="grid grid-cols-[125px_1fr] gap-2 items-center py-1.5 border-b border-slate-100">
-                            <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
-                              <User className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
-                              Persona
-                            </span>
-                            <span className="font-extrabold text-unity-slate text-right">{mockCustomer.segment}</span>
-                          </div>
-                          
-                          <div className="grid grid-cols-[125px_1fr] gap-2 items-center py-1.5 border-b border-slate-100">
-                            <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
-                              <Award className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
-                              Savings Tier
-                            </span>
-                            <span className="font-extrabold text-unity-gold-dark text-right">{mockCustomer.tier}</span>
-                          </div>
+                      <h2 className="text-lg font-extrabold text-unity-slate">Customer Profile</h2>
+                    </div>
 
-                          <div className="grid grid-cols-[125px_1fr] gap-2 items-center py-1.5 border-b border-slate-100">
-                            <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
-                              <Calendar className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
-                              Age & Gender
-                            </span>
-                            <span className="font-extrabold text-unity-slate text-right">{customerExtended.demographics.age} • {customerExtended.demographics.gender}</span>
-                          </div>
+                    {/* Profile Details (shifted left, no longer nested inside header's flex child) */}
+                    <div className="space-y-2.5 text-xs">
+                      <div className="grid grid-cols-[120px_1fr] gap-2 items-center py-2.5 border-b border-slate-100">
+                        <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
+                          <User className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
+                          Persona
+                        </span>
+                        <span className="font-semibold text-unity-slate text-right">{mockCustomer.segment}</span>
+                      </div>
+                      
+                      <div className="grid grid-cols-[120px_1fr] gap-2 items-center py-2.5 border-b border-slate-100">
+                        <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
+                          <Award className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
+                          Savings Tier
+                        </span>
+                        <span className="font-semibold text-unity-gold-dark text-right">{mockCustomer.tier}</span>
+                      </div>
 
-                          <div className="grid grid-cols-[125px_1fr] gap-2 items-center py-1.5 border-b border-slate-100">
-                            <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
-                              <Briefcase className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
-                              Occupation
-                            </span>
-                            <span className="font-extrabold text-unity-slate text-right truncate" title={customerExtended.demographics.occupation}>{customerExtended.demographics.occupation}</span>
-                          </div>
+                      <div className="grid grid-cols-[120px_1fr] gap-2 items-center py-2.5 border-b border-slate-100">
+                        <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
+                          <Calendar className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
+                          Age & Gender
+                        </span>
+                        <span className="font-semibold text-unity-slate text-right">{customerExtended.demographics.age} • {customerExtended.demographics.gender}</span>
+                      </div>
 
-                          <div className="grid grid-cols-[125px_1fr] gap-2 items-center py-1.5 border-b border-slate-100">
-                            <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
-                              <Heart className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
-                              Marital Status
-                            </span>
-                            <span className="font-extrabold text-unity-slate text-right">{customerExtended.demographics.maritalStatus}</span>
-                          </div>
+                      <div className="grid grid-cols-[120px_1fr] gap-2 items-center py-2.5 border-b border-slate-100">
+                        <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
+                          <Briefcase className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
+                          Occupation
+                        </span>
+                        <span className="font-semibold text-unity-slate text-right leading-tight" title={customerExtended.demographics.occupation}>
+                          {customerExtended.demographics.occupation}
+                        </span>
+                      </div>
 
-                          <div className="grid grid-cols-[125px_1fr] gap-2 items-center py-1.5 border-b border-slate-100">
-                            <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
-                              <MapPin className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
-                              Geography
-                            </span>
-                            <span className="font-extrabold text-unity-slate text-right truncate" title={customerExtended.demographics.geography}>{customerExtended.demographics.geography}</span>
-                          </div>
+                      <div className="grid grid-cols-[120px_1fr] gap-2 items-center py-2.5 border-b border-slate-100">
+                        <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
+                          <Heart className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
+                          Marital Status
+                        </span>
+                        <span className="font-semibold text-unity-slate text-right">{customerExtended.demographics.maritalStatus}</span>
+                      </div>
 
-                          <div className="grid grid-cols-[125px_1fr] gap-2 items-center py-1.5 border-b border-slate-100">
-                            <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
-                              <TrendingUp className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
-                              Wallet Share
-                            </span>
-                            <span className="font-extrabold text-unity-slate text-right">{customerExtended.demographics.walletShare}</span>
-                          </div>
+                      <div className="grid grid-cols-[120px_1fr] gap-2 items-center py-2.5 border-b border-slate-100">
+                        <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
+                          <MapPin className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
+                          Geography
+                        </span>
+                        <span className="font-semibold text-unity-slate text-right leading-tight" title={customerExtended.demographics.geography}>
+                          {customerExtended.demographics.geography}
+                        </span>
+                      </div>
 
-                          <div className="grid grid-cols-[125px_1fr] gap-2 items-center py-1.5">
-                            <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
-                              <Shield className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-                              Risk Rating
-                            </span>
-                            <span className="font-extrabold text-emerald-600 text-right">{customerExtended.riskProfile.category}</span>
-                          </div>
-                        </div>
+                      <div className="grid grid-cols-[120px_1fr] gap-2 items-center py-2.5 border-b border-slate-100">
+                        <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
+                          <TrendingUp className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
+                          Wallet Share
+                        </span>
+                        <span className="font-semibold text-unity-slate text-right">{customerExtended.demographics.walletShare}</span>
+                      </div>
+
+                      <div className="grid grid-cols-[120px_1fr] gap-2 items-center py-2.5">
+                        <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
+                          <Shield className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                          Risk Rating
+                        </span>
+                        <span className="font-semibold text-emerald-600 text-right">{customerExtended.riskProfile.category}</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="border-t border-gray-100 pt-3 mt-3 space-y-2">
-                    <h3 className="font-bold text-unity-slate/80 text-xs uppercase tracking-wider">RM & Branch Details</h3>
-                    <div className="space-y-1 text-xs">
-                      <div className="flex items-center gap-2">
-                        <Phone className="w-4 h-4 text-unity-slate/40 flex-shrink-0" />
-                        <span className="text-unity-slate/60">Phone:</span>
-                        <span className="font-bold text-unity-slate">{mockCustomer.phone}</span>
+                  {/* RM & Branch Details */}
+                  <div className="border-t border-gray-100 pt-4 mt-4 space-y-2">
+                    <h3 className="font-bold text-unity-slate/80 text-xs uppercase tracking-wider mb-3">RM & Branch Details</h3>
+                    <div className="space-y-2 text-xs">
+                      <div className="grid grid-cols-[120px_1fr] gap-2 items-start py-1.5 border-b border-dashed border-gray-100">
+                        <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
+                          <Phone className="w-3.5 h-3.5 text-unity-slate/40 flex-shrink-0" />
+                          Phone:
+                        </span>
+                        <span className="font-semibold text-unity-slate text-right">{mockCustomer.phone}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Mail className="w-4 h-4 text-unity-slate/40 flex-shrink-0" />
-                        <span className="text-unity-slate/60">Email:</span>
-                        <span className="font-bold text-unity-slate">{mockCustomer.email}</span>
+                      <div className="grid grid-cols-[120px_1fr] gap-2 items-start py-1.5 border-b border-dashed border-gray-100">
+                        <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
+                          <Mail className="w-3.5 h-3.5 text-unity-slate/40 flex-shrink-0" />
+                          Email:
+                        </span>
+                        <span className="font-semibold text-unity-slate text-right break-all">{mockCustomer.email}</span>
                       </div>
-                      <div className="flex items-center gap-2 border-t border-dashed border-gray-200 pt-1.5 mt-1.5">
-                        <Landmark className="w-4 h-4 text-unity-gold-dark flex-shrink-0" />
-                        <span className="text-unity-slate/60">Branch:</span>
-                        <span className="font-bold text-unity-slate">{customerExtended.branch}</span>
+                      <div className="grid grid-cols-[120px_1fr] gap-2 items-start py-1.5 border-b border-dashed border-gray-100">
+                        <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
+                          <Landmark className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
+                          Branch:
+                        </span>
+                        <span className="font-semibold text-unity-slate text-right">{customerExtended.branch}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4 text-unity-gold-dark flex-shrink-0" />
-                        <span className="text-unity-slate/60">Managed By:</span>
-                        <span className="font-bold text-unity-slate">
+                      <div className="grid grid-cols-[120px_1fr] gap-2 items-start py-1.5">
+                        <span className="text-unity-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
+                          <Users className="w-3.5 h-3.5 text-unity-gold-dark flex-shrink-0" />
+                          Managed By:
+                        </span>
+                        <span className="font-semibold text-unity-slate text-right leading-tight">
                           RM {customerExtended.managedBy.name} ({customerExtended.managedBy.phone})
                         </span>
                       </div>
