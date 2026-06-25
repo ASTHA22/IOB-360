@@ -1,10 +1,10 @@
-# Unity Small Finance Bank — Customer 360° Portal
+# Unity Small Finance Bank — Customer 360° Portal (Pearl Savings Program)
 
 **Live Deployment URL:** [https://unity-small-finance-bank-customer-3.vercel.app/](https://unity-small-finance-bank-customer-3.vercel.app/)
 
 A premium, light-themed Customer 360° relationship workbench and underwriting platform designed for Relationship Managers (RMs) and credit risk officers at **Unity Small Finance Bank**. 
 
-This system aggregates customer demographics, active product stacks, engagement trends, and risk matrices into a single interface to streamline decision-making and cross-selling.
+This system aggregates retail customer demographics, active product stacks, engagement trends, and risk matrices into a single interface to streamline decision-making and cross-selling. It is customized for the **Pearl Savings Program**—Unity SFB's premium offering tailored for women.
 
 ---
 
@@ -21,20 +21,20 @@ This system aggregates customer demographics, active product stacks, engagement 
 
 ## 🌟 Key Features
 
-### 1. Unified Customer 360° Profile Tab
-* **Customer Profile Header**: Visualizes customer tier, segments, CLTV score, digital index, and credit scores.
-* **Indian Lakhs Formatting (`L`)**: All numeric values (Monthly Income, Credit Outstanding, Chart Ticks, and tooltips) are formatted in Indian Lakhs for native business readability.
-* **Product Stack Summary**: Quick overview of active business products (Current Business Account, High-Yield Fixed Deposits, and active Business Overdraft limits).
-* **Credit Portfolio**: Details active loan products (MSME loans, EMIs, and repayment statuses).
+### 1. Unified Customer 360° Profile Tab (Pearl Tier)
+* **Customer Profile Header**: Visualizes premium customer tier (Pearl), customer persona, Primary Bank Index (88%), Digital Index (95%), Monthly Avg Balance (MAB: ₹3.8L), Total Relationship Value (TRV: ₹21.7L), and credit scores with glowing status indicators.
+* **Indian Lakhs Formatting (`L`)**: All numeric values (Balances, Credit Outstanding, Chart Ticks, and tooltips) are formatted in Indian Lakhs for native retail banking readability.
+* **Product Stack Summary**: Quick overview of active retail holdings (Pearl Savings Account, Demat & Trading 3-in-1 Account, RuPay Select Credit Card, and active Insurance policies).
+* **Credit Portfolio**: Details active loan products (Personal Loan, Gold Loan, and revolving Credit Card limits along with historical closed Consumer Durable loans).
 
 ### 2. Analytics & Expenditure Insights
-* **Business Outflow Distribution**: A donut chart breaking down operational cash outflows (Inventory & Raw Materials, Rent & Utilities, Logistics, and Payroll).
-* **Customer Balance & Inflow History**: A dual-area chart showing average account reserves (**Avg Balance**) vs. sales deposition velocity (**Monthly Inflows**) to monitor liquidity trends.
+* **Transaction Behavior (Spend Analyzer)**: A donut chart breaking down lifestyle spends (Shopping & Lifestyle, Food & Dining, Travel & Commute, and Bills & Utilities).
+* **Customer Balance & Inflow History**: A dual-area chart showing average account reserves (**Avg Balance**) vs. deposition velocity (**Monthly Inflows**) to monitor liquidity trends.
 * **Layout Alignment**: Nested grid structures ensure all card outlines match up perfectly across different screen sizes.
 
 ### 3. Unity AI Assistant & Underwriting Console
-* **Interactive AI Console**: Rebranded conversational **Unity Assistant** designed to guide RMs through pre-approved credit limit enhancements.
-* **Processing Workbench**: Simulated real-time loan console displaying underwriting bureau checks, loan configurations, days past due (DPD), and automated risk scoring.
+* **Interactive AI Console**: Rebranded conversational **Unity Assistant** designed to guide RMs through pre-approved credit card upgrades and locker privileges.
+* **Processing Workbench**: Simulated real-time loan console displaying underwriting bureau checks, loan configurations, days past due (DPD), and automated credit rules (e.g. RBI Key Fact Statement compliance, debt service capacity checks).
 
 ---
 

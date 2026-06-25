@@ -18,7 +18,7 @@ export default function MobileLoanFlow() {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [progress, setProgress] = useState(0);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
-    { sender: 'mitra', text: `Hi Rohan! 👋 I see you're applying for a ₹5L Business Growth Loan. Let me help you finalize this!` }
+    { sender: 'mitra', text: `Hi Astha! 👋 I see you're applying for a ₹5L Personal Loan. Let me help you finalize this!` }
   ]);
 
   // Sync with global context
@@ -151,7 +151,7 @@ export default function MobileLoanFlow() {
                       <div className="bg-gradient-to-br from-unity-gold-light via-[#FFFDF6] to-white border border-unity-gold-border rounded-xl p-5 mb-4 shadow-xs">
                         <p className="text-[10px] text-unity-slate/60 font-bold uppercase mb-1">Pre-Approved Offer</p>
                         <p className="text-3xl font-black text-unity-slate">₹5,00,000</p>
-                        <p className="text-[10px] font-semibold text-unity-slate/70 mt-1">Unsecured Business Growth Loan</p>
+                        <p className="text-[10px] font-semibold text-unity-slate/70 mt-1">Unsecured Personal Loan</p>
                       </div>
 
                       <div className="space-y-3 mb-6 bg-slate-50/50 p-4 border border-slate-200/50 rounded-xl text-xs">
@@ -264,7 +264,7 @@ export default function MobileLoanFlow() {
                       </div>
                       <h2 className="text-xl font-black text-unity-slate mb-2">Limit Disbursed!</h2>
                       <p className="text-xs text-unity-slate/75 text-center mb-6 leading-relaxed">
-                        Your Unsecured Business Growth Loan limit has been approved and activated.
+                        Your Unsecured Personal Loan has been approved and activated.
                       </p>
                       
                       <div className="bg-gradient-to-br from-unity-gold-light via-[#FFFDF5] to-white border border-unity-gold-border rounded-xl p-4 w-full shadow-xs">
@@ -272,15 +272,15 @@ export default function MobileLoanFlow() {
                         <div className="space-y-1.5 text-xs">
                           <div className="flex justify-between">
                             <span className="text-unity-slate/60">Amount</span>
-                            <span className="font-bold text-unity-slate">₹5,00,000</span>
+                            <span className="font-bold text-unity-slate">₹{mockLoanApplication.amount.toLocaleString()}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-unity-slate/60">EMI Schedule</span>
-                            <span className="font-bold text-unity-slate">₹24,126/mo</span>
+                            <span className="font-bold text-unity-slate">₹{mockLoanApplication.monthlyEMI.toLocaleString()}/mo</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-unity-slate/60">Tenure</span>
-                            <span className="font-bold text-unity-slate">24 Months</span>
+                            <span className="font-bold text-unity-slate">{mockLoanApplication.tenure} Months</span>
                           </div>
                         </div>
                       </div>
@@ -321,7 +321,7 @@ export default function MobileLoanFlow() {
                   <span className="text-unity-slate font-extrabold text-xs">Identity OTP Triggered</span>
                 </div>
                 <p className="text-unity-slate/85 text-xs">
-                  A 6-digit mobile verification token dispatched via SMS & WhatsApp to promoter +91 98004 XX789.
+                  A 6-digit mobile verification token dispatched via SMS & WhatsApp to customer +91 98004 XX789.
                 </p>
                 <p className="text-unity-slate/40 text-[9px] font-semibold mt-1">Vendor: Gupshup API • Trigger: Client_App_Init</p>
               </div>
@@ -335,7 +335,7 @@ export default function MobileLoanFlow() {
                   <span className="text-unity-slate font-extrabold text-xs">Key Fact Statement Generated & Dispatched</span>
                 </div>
                 <p className="text-unity-slate/85 text-xs">
-                  Calculated terms for Unsecured Growth Loan: Principal ₹5L, 24 months, 14.5% interest, EMI ₹24,126, Fee ₹4,999.
+                  Calculated terms for Unsecured Personal Loan: Principal ₹5L, 24 months, 12.5% interest, EMI ₹23,650, Fee ₹4,999.
                 </p>
                 <p className="text-unity-slate/40 text-[9px] font-semibold mt-1">Compliance Rule: RBI-DIR-KFS-2024 applied ✓</p>
               </div>
@@ -349,7 +349,7 @@ export default function MobileLoanFlow() {
                   <span className="text-unity-slate font-extrabold text-xs">Unity Assistant Route Triggered</span>
                 </div>
                 <p className="text-unity-slate/85 text-xs">
-                  Customer asked about pre-payment guidelines. AI parsed query and confirmed: "Nil penalty after 3 months".
+                  Customer asked about pre-payment guidelines. AI parsed query and confirmed: "Nil penalty after 6 months".
                 </p>
                 <p className="text-emerald-700 text-[9px] font-bold mt-1">Status: Customer request solved via automated intent matching ✓</p>
               </div>
@@ -363,7 +363,7 @@ export default function MobileLoanFlow() {
                   <span className="text-unity-slate font-extrabold text-xs">Rule Engine Assessment</span>
                 </div>
                 <p className="text-unity-slate/85 text-xs mb-2">
-                  Running KYC checks, CIBIL verification (Score: 765), and debt service ratio (FOIR headroom: 42.5%).
+                  Running KYC checks, CIBIL verification (Score: 765), and debt service ratio (FOIR: 32.5%).
                 </p>
                 {currentScreen === 'processing' && (
                   <div className="mt-2.5 bg-white p-2.5 rounded-lg border border-slate-200">
@@ -410,7 +410,7 @@ export default function MobileLoanFlow() {
                 <span className="text-unity-slate font-extrabold text-xs">Inflow Assessment</span>
               </div>
               <p className="text-unity-slate/80 text-xs">
-                Evaluating CA inflows: ₹4,18,000 average monthly credit volumes. Inflow to debt obligations ratio cleared.
+                Evaluating savings account inflows: ₹1,50,000 average monthly inflow. Inflow to debt obligations ratio cleared.
               </p>
             </div>
           </div>

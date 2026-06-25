@@ -2,17 +2,17 @@ import type { Customer, LoanApplication, CreditProduct, Trigger } from '../types
 
 export const mockCustomer: Customer = {
   id: 'CUST001',
-  name: 'Rohan Mehta',
+  name: 'Astha Singh',
   phone: '+91 98004 XX789',
-  email: 'rohan.mehta@enterprises.com',
-  tier: 'Gold',
+  email: 'astha.singh@unitycustomer.com',
+  tier: 'Pearl',
   since: 'Nov 2022',
-  cltv: 8.4,
-  cltvScore: 84,
-  monthlyIncome: 120000,
-  foir: 42.5,
+  cltv: 8.8,
+  cltvScore: 88,
+  monthlyIncome: 150000,
+  foir: 32.5,
   creditScore: 765,
-  segment: 'MSME Promoter'
+  segment: 'Working Woman'
 };
 
 // Extended customer data
@@ -29,13 +29,15 @@ export const customerExtended = {
     bureauScore: 765
   },
   interactions: {
-    ccCalls: 4,
-    lastCall: '6 days ago',
-    emails: 3,
-    chats: 11,
+    ccCalls: 2,
+    lastCall: '4 days ago',
+    emails: 1,
+    chats: 4,
     complaints: 0,
-    lastAppLogin: '45 mins ago',
-    appUsageFrequency: 'Daily (Business Portal)'
+    lastAppLogin: '12 mins ago',
+    appUsageFrequency: 'Daily (Mobile App)',
+    branchVisits: 'Low (1 visit in last 12 months)',
+    surveysCompleted: 3
   },
   preferences: {
     contactChannel: 'WhatsApp',
@@ -44,16 +46,42 @@ export const customerExtended = {
     digitalPreference: 'High'
   },
   linkedAccounts: {
-    coBorrowers: ['Kiran Mehta (Business Partner)'],
-    deposits: ['9.0% High-Yield FD: ₹12,50,000', 'Current Account: ₹3,18,400'],
-    otherLoans: ['Secured Business Loan: ₹15,00,000']
+    coBorrowers: [],
+    deposits: [],
+    otherLoans: []
   },
   alerts: {
     bureauTriggers: 0,
     dpd: 0,
     ewsFlags: []
   },
-  persona: 'MSME Entrepreneur - Wholesale Trade'
+  persona: 'Digital Savvy Working Woman - Senior Tech Executive',
+  branch: 'Worli Branch, Mumbai',
+  managedBy: {
+    name: 'Priyesh Shah',
+    phone: '+91 98200 98765'
+  },
+  demographics: {
+    age: 32,
+    gender: 'Female',
+    occupation: 'Salaried (VP - Technology)',
+    maritalStatus: 'Married',
+    geography: 'Mumbai (Metro - Tier 1, West)',
+    walletShare: '78%'
+  },
+  relationshipMetrics: {
+    primaryBankIndex: '88%',
+    digitalIndex: '95%',
+    trv: '₹21.7L', // CASA + TD + Assets
+    ppcRatio: 3, // financial & non-financial (app active)
+    balanceGrowth: {
+      ytd: '+18.0%',
+      mtd: '+2.4%',
+      aab: '₹3.8L'
+    },
+    savingsRetail: 'Savings Account (Pearl Program), Demat & Trading (3-in-1: Savings + Demat + Trading)',
+    insurance: 'Term Life (₹1.5 Cr Cover), Health (Super Top-up, ₹15L Cover)'
+  }
 };
 
 export const mockLoanApplication: LoanApplication = {
@@ -61,85 +89,93 @@ export const mockLoanApplication: LoanApplication = {
   customerId: 'CUST001',
   amount: 500000,
   tenure: 24,
-  interestRate: 14.5,
-  apr: 15.2,
-  monthlyEMI: 24126,
+  interestRate: 12.5,
+  apr: 13.2,
+  monthlyEMI: 23650,
   processingFee: 4999,
-  totalInterest: 79024,
-  totalAmount: 579024,
-  prepaymentPenalty: 'Nil after 3 months',
+  totalInterest: 67600,
+  totalAmount: 567600,
+  prepaymentPenalty: 'Nil after 6 months',
   penalCharges: '2% p.a. on overdue amount',
   status: 'processing',
-  type: 'Unsecured Business Growth Loan'
+  type: 'Unsecured Personal Loan'
 };
 
 export const mockCreditProducts: CreditProduct[] = [
   {
-    type: 'Secured MSME Business Loan',
-    amount: 1500000,
-    outstanding: 1140000,
-    emi: 42000,
-    tenure: '28/48 mo',
+    type: 'Personal Loan (PL)',
+    amount: 400000,
+    outstanding: 280000,
+    emi: 18500,
+    tenure: '24 months (12 remaining)',
     status: 'active'
   },
   {
-    type: 'Commercial Vehicle Loan',
-    amount: 850000,
+    type: 'Gold Loan (GL)',
+    amount: 250000,
+    outstanding: 120000,
+    emi: 8000,
+    tenure: '12 months (6 remaining)',
+    status: 'active'
+  },
+  {
+    type: 'RuPay Select Credit Card (CC)',
+    amount: 150000,
+    outstanding: 18000,
+    emi: 0,
+    tenure: 'Revolving',
+    status: 'active'
+  },
+  {
+    type: 'Consumer Durable Loan',
+    amount: 60000,
     outstanding: 0,
     emi: 0,
     tenure: 'Closed Dec 2025',
     status: 'closed'
-  },
-  {
-    type: 'Business Overdraft Limit',
-    amount: 300000,
-    outstanding: 45000,
-    emi: 1800,
-    tenure: 'Renewable Annually',
-    status: 'active'
   }
 ];
 
 export const mockTriggers: Trigger[] = [
   {
     id: 'T1',
-    name: 'MSME Expansion Need Identified',
+    name: 'Credit Card Upgrade Eligible',
     type: 'AI Engine',
     urgency: 'high',
     timestamp: new Date(),
-    description: 'Customer checked Business Overdraft expansion terms twice in 48 hours. Inflows on Current Account up 22% YoY.'
+    description: 'Pre-approved for Pearl Premium Credit Card upgrade. Lead ID: CC98024. Wallet share increase potential: 15%.'
   },
   {
     id: 'T2',
-    name: 'Pre-Approved Offer Re-engagement',
+    name: 'Locker Facility Discount',
     type: 'Campaign',
     urgency: 'medium',
     timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
-    description: 'WhatsApp pitch for ₹5L Unsecured Business Growth Loan sent. Message read, CTA clicked.'
+    description: 'Eligible for a 25% special discount on locker rentals (Pearl Savings Account benefit). High interest shown during last mobile app session.'
   },
   {
     id: 'T3',
-    name: 'High-Yield FD Maturity',
+    name: 'Term Insurance Review',
     type: 'Event',
-    urgency: 'high',
+    urgency: 'medium',
     timestamp: new Date(),
-    description: '₹12.5L FD maturing in 15 days. High retention priority. Cross-sell double-yield reinvestment or overdraft against FD.'
+    description: 'Term life cover of ₹1.5 Cr exists. Opportunity to cross-sell Critical Illness rider or top-up cover based on salaried profile.'
   },
   {
     id: 'T4',
-    name: 'Clean Credit History',
+    name: 'Gold Loan Top-up Eligibility',
     type: 'Data',
     urgency: 'low',
     timestamp: new Date(),
-    description: 'CIBIL 765. Zero DPD in last 24 months. Fully verified KYC. Safe underwriter rating.'
+    description: 'Repayment track 100% clean. LTV ratio dropped due to gold price increase. Eligible for instant ₹50k top-up.'
   }
 ];
 
 export const spendingCategories = [
-  { name: 'Inventory & Raw Materials', percentage: 45, color: '#2A3649' },
-  { name: 'Business Rent & Utilities', percentage: 20, color: '#4A5B75' },
-  { name: 'Logistics & Supply Chain', percentage: 20, color: '#F5BE18' },
-  { name: 'Employee Payroll', percentage: 15, color: '#D49D07' }
+  { name: 'Shopping & Lifestyle', percentage: 40, color: '#2A3649' },
+  { name: 'Food & Dining', percentage: 25, color: '#4A5B75' },
+  { name: 'Travel & Commute', percentage: 20, color: '#F5BE18' },
+  { name: 'Bills & Utilities', percentage: 15, color: '#D49D07' }
 ];
 
 export const unityCorporateHighlights = {

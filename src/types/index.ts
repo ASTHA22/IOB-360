@@ -3,7 +3,7 @@ export interface Customer {
   name: string;
   phone: string;
   email: string;
-  tier: 'Gold' | 'Silver' | 'Platinum';
+  tier: string;
   since: string;
   cltv: number;
   cltvScore: number;
@@ -61,5 +61,5 @@ export interface CreditProduct {
   outstanding: number;
   emi: number;
   tenure: string;
-  status: 'active' | 'closed' | 'pre-approved';
+  status: string;
 }

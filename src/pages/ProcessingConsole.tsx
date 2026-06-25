@@ -36,7 +36,7 @@ export default function ProcessingConsole() {
       event: 'AI Routing Intent Resolution',
       status: 'info',
       channel: 'AI',
-      details: 'Customer queried prepayment terms. Resolved: Nil penalty after 3 months. Rule engine confirmed RBI compliance.'
+      details: 'Customer queried prepayment terms. Resolved: Nil penalty after 6 months. Rule engine confirmed RBI compliance.'
     },
     {
       id: '4',
@@ -44,7 +44,7 @@ export default function ProcessingConsole() {
       event: 'Key Fact Statement (KFS) Generated',
       status: 'success',
       channel: 'KFS',
-      details: '₹5L Principal. 24 months. 14.5% p.a. EMI: ₹24,126. Processing fee ₹4,999. RBI compliance checklist cleared.'
+      details: '₹5L Principal. 24 months. 12.5% p.a. EMI: ₹23,650. Processing fee ₹4,999. RBI compliance checklist cleared.'
     },
     {
       id: '5',
@@ -60,14 +60,14 @@ export default function ProcessingConsole() {
       event: 'Campaign Re-engagement Triggered',
       status: 'info',
       channel: 'CAMPAIGN',
-      details: 'FD maturity date identified (15 days). Unlocked pre-approved limit rate incentive: ₹5L growth loan.'
+      details: 'FD maturity date identified (15 days). Unlocked pre-approved limit rate incentive: ₹5L personal loan.'
     },
     {
       id: '7',
       timestamp: new Date(Date.now() - 20000),
       event: 'Inflow growth indicator detected',
       status: 'success',
-      details: 'CA accounts show 22% MoM growth in business receipts. Recommended for Unsecured credit limit.'
+      details: 'Savings account shows strong steady inflows. Recommended for Unsecured retail credit limit.'
     },
     {
       id: '8',
@@ -75,14 +75,14 @@ export default function ProcessingConsole() {
       event: 'WhatsApp Link Dispatched via Campaign Engine',
       status: 'success',
       channel: 'WA',
-      details: 'WhatsApp CTA deep-link generated: https://unitybank.in/apply?offer=wc-loan-5L. Click registered.'
+      details: 'WhatsApp CTA deep-link generated: https://unitybank.in/apply?offer=pl-loan-5L. Click registered.'
     },
     {
       id: '9',
       timestamp: new Date(Date.now() - 30000),
-      event: 'Business Portal Session Active',
+      event: 'Retail Portal Session Active',
       status: 'info',
-      details: 'Customer Rohan Mehta logged into Unity Business Portal. Pre-fill data fetched.'
+      details: 'Customer Astha Singh logged into Unity Retail Portal. Pre-fill data fetched.'
     }
   ]);
 
@@ -327,7 +327,7 @@ export default function ProcessingConsole() {
                 <h3 className="font-extrabold text-unity-slate text-xs uppercase tracking-wider mb-3">Active Policy Rules Matrix</h3>
                 <div className="space-y-2 text-xs text-unity-slate/85">
                   <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-                    <span>RULE-EXP-001: MSME Receipts growth multiplier</span>
+                    <span>RULE-INFLOW-001: Retail balance & inflow growth check</span>
                     <span className="text-emerald-500 font-bold">CLEARED ✓</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-100 pb-2">
@@ -339,7 +339,7 @@ export default function ProcessingConsole() {
                     <span className="text-emerald-500 font-bold">CLEARED ✓</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span>RULE-FOIR-WC: Debt service capacity check</span>
+                    <span>RULE-FOIR-RET: Retail debt service capacity check (FOIR &lt; 40%)</span>
                     <span className="text-emerald-500 font-bold">CLEARED ✓</span>
                   </div>
                 </div>
@@ -357,7 +357,7 @@ export default function ProcessingConsole() {
                     <span className="text-emerald-500 font-bold">Delivered ✓</span>
                   </div>
                   <div className="flex items-center justify-between border-b border-gray-100 pb-2">
-                    <span>Business Web Portal Push</span>
+                    <span>Retail Web Portal Push</span>
                     <span className="text-amber-500 font-bold">Active</span>
                   </div>
                   <div className="flex items-center justify-between">

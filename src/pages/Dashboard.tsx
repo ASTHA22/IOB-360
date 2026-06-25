@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, TrendingUp, Award, CreditCard, Briefcase, User, Phone, Mail, MessageSquare, Shield, Clock, Globe, Users, FileText, Landmark, BarChart2, Activity } from 'lucide-react';
+import { ArrowLeft, TrendingUp, Award, CreditCard, Briefcase, User, Phone, Mail, MessageSquare, Clock, Globe, Users, FileText, Landmark, BarChart2, Activity } from 'lucide-react';
 import { mockCustomer, mockCreditProducts, mockTriggers, customerExtended, spendingCategories } from '../services/mockData';
 import logoImg from '../assets/logo.png';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
@@ -10,40 +10,39 @@ type TabType = 'profile' | 'offers' | 'insights';
 export default function Dashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<TabType>('profile');
-  const [cltvScore, setCltvScore] = useState(84);
+  const [primaryBankIndex, setPrimaryBankIndex] = useState(88);
   const [termDepositOpt, setTermDepositOpt] = useState(false);
-  const [supplyChainOpt, setSupplyChainOpt] = useState(false);
-  const [creditCardOpt, setCreditCardOpt] = useState(false);
-  const [whatsappAlertsOpt, setWhatsappAlertsOpt] = useState(false);
+  const [lockerOpt, setLockerOpt] = useState(false);
+  const [dematOpt, setDematOpt] = useState(false);
+  const [insuranceOpt, setInsuranceOpt] = useState(false);
 
-  const calcCLTVScore = () => {
-    let score = cltvScore;
-    if (termDepositOpt) score += 4;
-    if (supplyChainOpt) score += 5;
-    if (creditCardOpt) score += 3;
-    if (whatsappAlertsOpt) score += 2;
-    return Math.min(100, score);
+  const calcPrimaryBankIndex = () => {
+    let index = primaryBankIndex;
+    if (termDepositOpt) index += 3;
+    if (lockerOpt) index += 2;
+    if (dematOpt) index += 4;
+    if (insuranceOpt) index += 3;
+    return Math.min(100, index);
   };
 
-  const calcAnnualYield = () => {
-    let yieldVal = 112500;
-    if (termDepositOpt) yieldVal += 40000;
-    if (supplyChainOpt) yieldVal += 75000;
-    if (creditCardOpt) yieldVal += 12000;
-    if (whatsappAlertsOpt) yieldVal += 2000;
-    return yieldVal;
+  const calcTRVValue = () => {
+    let trvVal = 21.7;
+    if (termDepositOpt) trvVal += 10.0;
+    if (lockerOpt) trvVal += 0.5;
+    if (dematOpt) trvVal += 2.0;
+    if (insuranceOpt) trvVal += 1.0;
+    return `₹${trvVal.toFixed(1)}L`;
   };
 
   const calcPPCIndex = () => {
     let ppc = 3.0;
-    if (termDepositOpt) ppc += 1;
-    if (supplyChainOpt) ppc += 1;
-    if (creditCardOpt) ppc += 1;
+    if (termDepositOpt) ppc += 0.5;
+    if (lockerOpt) ppc += 0.5;
+    if (dematOpt) ppc += 0.5;
+    if (insuranceOpt) ppc += 0.5;
     return ppc;
   };
-  const [appSessions, setAppSessions] = useState(92);
-  const [waOpenRate, setWaOpenRate] = useState(85);
-  const [crossSell, setCrossSell] = useState(67);
+  const [digitalTransactions, setDigitalTransactions] = useState(95);
   const [isLive] = useState(true);
   const [showOffers, setShowOffers] = useState(false);
 
@@ -59,10 +58,8 @@ export default function Dashboard() {
     if (!isLive) return;
 
     const interval = setInterval(() => {
-      setCltvScore(prev => Math.min(100, prev + Math.floor(Math.random() * 2)));
-      setAppSessions(prev => Math.min(100, prev + Math.floor(Math.random() * 3) - 1));
-      setWaOpenRate(prev => Math.min(100, prev + Math.floor(Math.random() * 2)));
-      setCrossSell(prev => Math.min(100, prev + Math.floor(Math.random() * 2)));
+      setPrimaryBankIndex(prev => Math.min(100, prev + (Math.random() > 0.7 ? 1 : 0)));
+      setDigitalTransactions(prev => Math.min(100, prev + (Math.random() > 0.8 ? 1 : 0)));
     }, 3000);
 
     return () => clearInterval(interval);
@@ -129,7 +126,7 @@ export default function Dashboard() {
                   : 'border-transparent text-unity-slate/60 hover:text-unity-slate hover:border-gray-200'
               }`}
             >
-              AI Insights
+              Diagnostics & Triggers
             </button>
           </div>
         </div>
@@ -153,7 +150,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className="text-left sm:text-right">
-                    <p className="text-unity-slate/60 text-xs mb-2">Customer since {mockCustomer.since}</p>
+                    <p className="text-unity-slate font-black text-xs sm:text-sm mb-1.5">Customer since: {mockCustomer.since} • <span className="text-unity-gold-dark font-extrabold">3.5 Years</span></p>
                     <div className="inline-flex items-center gap-1.5 bg-unity-gold/20 text-unity-gold-dark px-3 py-1 rounded-full font-bold text-xs border border-unity-gold-border">
                       <Award className="w-3.5 h-3.5" />
                       {mockCustomer.tier} Tier
@@ -161,24 +158,39 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6 relative z-10">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-6 relative z-10">
                   <div className="bg-white/80 border border-unity-gold-border/60 rounded-xl p-3.5 card-hover transform transition-all duration-300 hover:scale-102 shadow-xs">
-                    <p className="text-unity-slate/50 text-[10px] font-bold uppercase mb-1">CLTV Score</p>
-                    <p className="text-xl font-extrabold text-unity-slate">{cltvScore}/100</p>
+                    <p className="text-unity-slate/50 text-[10px] font-bold uppercase mb-1">Primary Bank Index</p>
+                    <p className="text-xl font-extrabold text-unity-slate">{primaryBankIndex}%</p>
                     <div className="w-full bg-slate-200 rounded-full h-1.5 mt-2">
-                      <div className="bg-unity-gold h-1.5 rounded-full transition-all duration-500" style={{ width: `${cltvScore}%` }}></div>
+                      <div className="bg-unity-gold h-1.5 rounded-full transition-all duration-500" style={{ width: `${primaryBankIndex}%` }}></div>
                     </div>
                   </div>
                   <div className="bg-white/80 border border-unity-gold-border/60 rounded-xl p-3.5 card-hover transform transition-all duration-300 hover:scale-102 shadow-xs">
-                    <p className="text-unity-slate/50 text-[10px] font-bold uppercase mb-1">Monthly Income</p>
-                    <p className="text-xl font-extrabold text-unity-slate">₹{(mockCustomer.monthlyIncome / 100000).toFixed(1)}L</p>
+                    <p className="text-unity-slate/50 text-[10px] font-bold uppercase mb-1">Monthly Avg Balance</p>
+                    <p className="text-xl font-extrabold text-unity-slate">₹3.8L</p>
+                    <p className="text-[10px] text-unity-slate/60 mt-1 font-semibold">As of May 26</p>
                   </div>
                   <div className="bg-white/80 border border-unity-gold-border/60 rounded-xl p-3.5 card-hover transform transition-all duration-300 hover:scale-102 shadow-xs">
-                    <p className="text-unity-slate/50 text-[10px] font-bold uppercase mb-1">FOIR Headroom</p>
-                    <p className="text-xl font-extrabold text-unity-slate">{mockCustomer.foir}%</p>
+                    <p className="text-unity-slate/50 text-[10px] font-bold uppercase mb-1">TRV (CASA+TD+Assets)</p>
+                    <p className="text-xl font-extrabold text-unity-slate">₹21.7L</p>
+                    <p className="text-[10px] text-unity-slate/60 mt-1 font-semibold">CASA + TD + Assets</p>
                   </div>
                   <div className="bg-white/80 border border-unity-gold-border/60 rounded-xl p-3.5 card-hover transform transition-all duration-300 hover:scale-102 shadow-xs">
-                    <p className="text-unity-slate/50 text-[10px] font-bold uppercase mb-1">Credit Score</p>
+                    <p className="text-unity-slate/50 text-[10px] font-bold uppercase mb-1">Digital Index</p>
+                    <p className="text-xl font-extrabold text-unity-slate">{digitalTransactions}%</p>
+                    <div className="w-full bg-slate-200 rounded-full h-1.5 mt-2">
+                      <div className="bg-emerald-500 h-1.5 rounded-full transition-all duration-500" style={{ width: `${digitalTransactions}%` }}></div>
+                    </div>
+                  </div>
+                  <div className="bg-white/80 border border-unity-gold-border/60 rounded-xl p-3.5 card-hover transform transition-all duration-300 hover:scale-102 shadow-xs">
+                    <div className="flex justify-between items-start">
+                      <p className="text-unity-slate/50 text-[10px] font-bold uppercase mb-1">Credit Score</p>
+                      <div className="flex items-center gap-1 bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded text-[8px] font-bold border border-emerald-200 leading-none">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        EXCELLENT
+                      </div>
+                    </div>
                     <p className="text-xl font-extrabold text-unity-slate">{mockCustomer.creditScore}</p>
                     <div className="w-full bg-slate-200 rounded-full h-1.5 mt-2">
                       <div className="bg-emerald-500 h-1.5 rounded-full transition-all duration-500" style={{ width: `${(mockCustomer.creditScore / 900) * 100}%` }}></div>
@@ -189,7 +201,7 @@ export default function Dashboard() {
 
               <div className="grid lg:grid-cols-3 gap-6 mb-6 animate-slideInLeft items-stretch">
                 {/* Column 1 - Customer Profile */}
-                <div className="bg-white rounded-2xl shadow-sm p-5 card-hover border border-unity-gold-border/50 flex flex-col justify-between h-full">
+                <div className="bg-white rounded-2xl shadow-sm p-5 card-hover border border-unity-gold-border/50 flex flex-col justify-between h-full animate-slideInLeft">
                   <div>
                     <div className="flex items-start gap-4 mb-4">
                       <div className="w-12 h-12 bg-unity-gold/10 rounded-full flex items-center justify-center text-unity-gold-dark flex-shrink-0">
@@ -200,56 +212,64 @@ export default function Dashboard() {
                         <div className="grid grid-cols-2 gap-3 text-xs">
                           <div>
                              <p className="text-unity-slate/50 font-bold uppercase">Segment</p>
-                             <p className="font-semibold text-unity-slate">{mockCustomer.segment}</p>
+                             <p className="font-semibold text-unity-slate">{customerExtended.demographics.gender} ({mockCustomer.segment})</p>
                           </div>
                           <div>
                              <p className="text-unity-slate/50 font-bold uppercase">Tier</p>
                              <p className="font-semibold text-unity-gold-dark">{mockCustomer.tier}</p>
                           </div>
                           <div>
-                             <p className="text-unity-slate/50 font-bold uppercase">Customer Since</p>
-                             <p className="font-semibold text-unity-slate">{mockCustomer.since}</p>
+                             <p className="text-unity-slate/50 font-bold uppercase">Age & Gender</p>
+                             <p className="font-semibold text-unity-slate">{customerExtended.demographics.age} • {customerExtended.demographics.gender}</p>
                           </div>
                           <div>
-                             <p className="text-unity-slate/50 font-bold uppercase">CLTV Status</p>
-                             <p className="font-semibold text-emerald-600">Excellent ({cltvScore})</p>
+                             <p className="text-unity-slate/50 font-bold uppercase">Occupation</p>
+                             <p className="font-semibold text-unity-slate">{customerExtended.demographics.occupation}</p>
                           </div>
                           <div>
-                             <p className="text-unity-slate/50 font-bold uppercase">Digital Index</p>
-                             <p className="font-semibold text-unity-slate">92/100 (High)</p>
+                             <p className="text-unity-slate/50 font-bold uppercase">Marital Status</p>
+                             <p className="font-semibold text-unity-slate">{customerExtended.demographics.maritalStatus}</p>
                           </div>
                           <div>
-                             <p className="text-unity-slate/50 font-bold uppercase">Risk Profile</p>
-                             <p className="font-semibold text-emerald-600">Low Risk</p>
+                             <p className="text-unity-slate/50 font-bold uppercase">Geography</p>
+                             <p className="font-semibold text-unity-slate">{customerExtended.demographics.geography}</p>
+                          </div>
+                          <div>
+                             <p className="text-unity-slate/50 font-bold uppercase">Wallet Share</p>
+                             <p className="font-semibold text-unity-slate">{customerExtended.demographics.walletShare}</p>
+                          </div>
+                          <div>
+                             <p className="text-unity-slate/50 font-bold uppercase">Risk Rating</p>
+                             <p className="font-semibold text-emerald-600">{customerExtended.riskProfile.category}</p>
                           </div>
                         </div>
                       </div>
                     </div>
-   
+    
                     <div className="border-t border-gray-100 pt-3">
-                      <h3 className="font-bold text-unity-slate/80 mb-3 text-xs uppercase tracking-wider">Business Behavior & Insight</h3>
+                      <h3 className="font-bold text-unity-slate/80 mb-3 text-xs uppercase tracking-wider">Balance Growth & AAB</h3>
                       <div className="grid grid-cols-3 gap-3">
                         <div className="bg-gradient-to-br from-amber-50/50 to-orange-50/20 border border-unity-gold-border rounded-lg p-2.5">
-                          <p className="text-[10px] font-bold text-unity-gold-dark mb-1">MoM Growth</p>
-                          <p className="text-xl font-extrabold text-unity-slate">+22%</p>
-                          <p className="text-[9px] text-unity-slate/60">Current Account</p>
+                          <p className="text-[10px] font-bold text-unity-gold-dark mb-1">YTD Growth</p>
+                          <p className="text-xl font-extrabold text-unity-slate">{customerExtended.relationshipMetrics.balanceGrowth.ytd}</p>
+                          <p className="text-[9px] text-unity-slate/60">Savings Balance</p>
                         </div>
                         <div className="bg-gradient-to-br from-slate-50 to-[#FAF9F6] border border-slate-200 rounded-lg p-2.5">
-                          <p className="text-[10px] font-bold text-unity-slate/80 mb-1">Avg Balance</p>
-                          <p className="text-xl font-extrabold text-unity-slate">₹3.1L</p>
-                          <p className="text-[9px] text-unity-slate/60">MAB Compliant</p>
+                          <p className="text-[10px] font-bold text-unity-slate/80 mb-1">MTD Growth</p>
+                          <p className="text-xl font-extrabold text-unity-slate">{customerExtended.relationshipMetrics.balanceGrowth.mtd}</p>
+                          <p className="text-[9px] text-unity-slate/60">Current Month</p>
                         </div>
                         <div className="bg-gradient-to-br from-amber-50/30 to-slate-50 border border-unity-gold-border rounded-lg p-2.5">
-                          <p className="text-[10px] font-bold text-unity-gold-dark mb-1">Product / Customer</p>
-                          <p className="text-xl font-extrabold text-unity-slate">3.0</p>
-                          <p className="text-[9px] text-unity-slate/60">Active CA, FD, OD</p>
+                          <p className="text-[10px] font-bold text-unity-gold-dark mb-1">AAB (Annual)</p>
+                          <p className="text-xl font-extrabold text-unity-slate">{customerExtended.relationshipMetrics.balanceGrowth.aab}</p>
+                          <p className="text-[9px] text-unity-slate/60">Avg Balance</p>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="border-t border-gray-100 pt-3 mt-3">
-                    <h3 className="font-bold text-unity-slate/80 mb-2 text-xs uppercase tracking-wider">Contact Information</h3>
+                  <div className="border-t border-gray-100 pt-3 mt-3 space-y-2">
+                    <h3 className="font-bold text-unity-slate/80 text-xs uppercase tracking-wider">RM & Branch Details</h3>
                     <div className="space-y-1 text-xs">
                       <div className="flex items-center gap-2">
                         <Phone className="w-4 h-4 text-unity-slate/40" />
@@ -261,37 +281,49 @@ export default function Dashboard() {
                         <span className="text-unity-slate/60">Email:</span>
                         <span className="font-bold text-unity-slate">{mockCustomer.email}</span>
                       </div>
+                      <div className="flex items-center gap-2 border-t border-dashed border-gray-200 pt-1.5 mt-1.5">
+                        <Landmark className="w-4 h-4 text-unity-gold-dark" />
+                        <span className="text-unity-slate/60">Branch:</span>
+                        <span className="font-bold text-unity-slate">{customerExtended.branch}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4 text-unity-gold-dark" />
+                        <span className="text-unity-slate/60">Managed By:</span>
+                        <span className="font-bold text-unity-slate">
+                          RM {customerExtended.managedBy.name} ({customerExtended.managedBy.phone})
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Column 2 - Engagement Momentum + Product Stack */}
-                <div className="grid grid-rows-[auto_1fr] gap-6 w-full">
+                <div className="grid grid-rows-[auto_1fr] gap-6 w-full animate-slideInLeft">
                   <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover">
                     <h2 className="text-base font-extrabold text-unity-slate mb-3 uppercase tracking-wider">Engagement Momentum</h2>
                     <div className="grid grid-cols-3 gap-3">
                       <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5">
-                        <span className="text-[10px] font-bold text-emerald-950 block mb-1.5 leading-tight">App<br/>Sessions</span>
+                        <span className="text-[10px] font-bold text-emerald-950 block mb-1.5 leading-tight">Digital<br/>Transactions</span>
                         <div className="w-full bg-emerald-200 rounded-full h-1 mt-1 mb-1.5">
-                          <div className="bg-emerald-600 h-1 rounded-full transition-all duration-500" style={{ width: `${appSessions}%` }}></div>
+                          <div className="bg-emerald-600 h-1 rounded-full transition-all duration-500" style={{ width: `${digitalTransactions}%` }}></div>
                         </div>
-                        <span className="text-sm font-extrabold text-emerald-700">{appSessions}%</span>
+                        <span className="text-sm font-extrabold text-emerald-700">{digitalTransactions}%</span>
                       </div>
 
                       <div className="bg-amber-50 border border-unity-gold-border rounded-lg p-2.5">
-                        <span className="text-[10px] font-bold text-unity-slate block mb-1.5 leading-tight">WhatsApp<br/>Open Rate</span>
+                        <span className="text-[10px] font-bold text-unity-slate block mb-1.5 leading-tight">PPC<br/>Ratio</span>
                         <div className="w-full bg-amber-200 rounded-full h-1 mt-1 mb-1.5">
-                          <div className="bg-unity-gold-dark h-1 rounded-full transition-all duration-500" style={{ width: `${waOpenRate}%` }}></div>
+                          <div className="bg-unity-gold-dark h-1 rounded-full transition-all duration-500" style={{ width: '100%' }}></div>
                         </div>
-                        <span className="text-sm font-extrabold text-unity-gold-dark">{waOpenRate}%</span>
+                        <span className="text-sm font-extrabold text-unity-gold-dark">3.0</span>
                       </div>
 
                       <div className="bg-slate-50 border border-slate-200 rounded-lg p-2.5">
-                        <span className="text-[10px] font-bold text-unity-slate block mb-1.5 leading-tight">Cross-Sell<br/>Affinity</span>
+                        <span className="text-[10px] font-bold text-unity-slate block mb-1.5 leading-tight">Branch<br/>Visits</span>
                         <div className="w-full bg-slate-200 rounded-full h-1 mt-1 mb-1.5">
-                          <div className="bg-unity-slate-light h-1 rounded-full transition-all duration-500" style={{ width: `${crossSell}%` }}></div>
+                          <div className="bg-unity-slate-light h-1 rounded-full transition-all duration-500" style={{ width: '10%' }}></div>
                         </div>
-                        <span className="text-sm font-extrabold text-unity-slate">{crossSell}%</span>
+                        <span className="text-sm font-extrabold text-unity-slate">Low</span>
                       </div>
                     </div>
                   </div>
@@ -299,43 +331,43 @@ export default function Dashboard() {
                   {/* Product Stack Card */}
                   <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover flex flex-col">
                     <h3 className="font-extrabold text-unity-slate mb-3 text-xs uppercase tracking-wider">Product Stack</h3>
-                    <div className="space-y-2">
+                    <div className="space-y-2 flex-1 flex flex-col justify-between">
                       <div className="flex items-center gap-2.5 p-2.5 bg-gradient-to-r from-amber-50/50 to-white rounded-lg border border-unity-gold-border/60">
-                        <div className="w-8 h-8 bg-unity-gold/15 border border-unity-gold-border rounded-lg flex items-center justify-center">
-                          <span className="text-unity-gold-dark font-extrabold text-xs">CA</span>
+                        <div className="w-8 h-8 bg-unity-gold/15 border border-unity-gold-border rounded-lg flex items-center justify-center flex-shrink-0">
+                          <span className="text-unity-gold-dark font-extrabold text-xs">SB</span>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-bold text-unity-slate text-xs">Current Business Account</p>
-                          <p className="text-[10px] text-unity-slate/70 truncate">₹3,18,400 • RuPay Select Credit Card Linked</p>
+                          <p className="font-bold text-unity-slate text-xs">Savings Account (Pearl Program)</p>
+                          <p className="text-[10px] text-unity-slate/70 truncate">3-in-1: Savings + Demat + Trading</p>
                         </div>
-                        <span className="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[9px] font-bold">ACTIVE</span>
+                        <span className="font-bold text-unity-slate text-xs flex-shrink-0">₹4,25,000</span>
                       </div>
                       <div className="flex items-center gap-2.5 p-2.5 bg-gradient-to-r from-amber-50/70 to-white rounded-lg border border-unity-gold-border/80">
-                        <div className="w-8 h-8 bg-unity-gold/20 border border-unity-gold-border rounded-lg flex items-center justify-center">
-                          <span className="text-unity-gold-dark font-extrabold text-xs">FD</span>
+                        <div className="w-8 h-8 bg-unity-gold/20 border border-unity-gold-border rounded-lg flex items-center justify-center flex-shrink-0">
+                          <span className="text-unity-gold-dark font-extrabold text-xs">CC</span>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-bold text-unity-slate text-xs">High-Yield Fixed Deposit</p>
-                          <p className="text-[10px] text-unity-slate/70 truncate">₹12,50,000 • 9.0% p.a. yield</p>
+                          <p className="font-bold text-unity-slate text-xs">RuPay Select Credit Card</p>
+                          <p className="text-[10px] text-unity-slate/70 truncate">Limit: ₹1,50,000 • Outstanding: ₹18,000</p>
                         </div>
-                        <span className="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[9px] font-bold">ACTIVE</span>
+                        <span className="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[9px] font-bold flex-shrink-0">ACTIVE</span>
                       </div>
                       <div className="flex items-center gap-2.5 p-2.5 bg-gradient-to-r from-slate-50 to-white rounded-lg border border-slate-200">
-                        <div className="w-8 h-8 bg-slate-100 border border-slate-200 rounded-lg flex items-center justify-center">
-                          <span className="text-unity-slate font-extrabold text-xs">OD</span>
+                        <div className="w-8 h-8 bg-slate-100 border border-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <span className="text-unity-slate font-extrabold text-xs">INS</span>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-bold text-unity-slate text-xs">Business Overdraft Limit</p>
-                          <p className="text-[10px] text-unity-slate/70 truncate">Limit: ₹3,00,000 • Utilized: 15%</p>
+                          <p className="font-bold text-unity-slate text-xs">Insurance Portfolio</p>
+                          <p className="text-[10px] text-unity-slate/70 truncate">Term Life (₹1.5 Cr Cover) & Health Insurance (₹15L)</p>
                         </div>
-                        <span className="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[9px] font-bold">ACTIVE</span>
+                        <span className="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-[9px] font-bold flex-shrink-0">ACTIVE</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Column 3 - Unity SFB Premium Card Flavor */}
-                <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover flex flex-col justify-between h-full">
+                <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover flex flex-col justify-between h-full animate-slideInLeft">
                   <div>
                     <div className="flex justify-between items-center mb-3">
                       <h3 className="font-extrabold text-unity-slate text-xs uppercase tracking-wider">Active Credit Card</h3>
@@ -350,7 +382,7 @@ export default function Dashboard() {
                       <div className="flex justify-between items-start">
                         <div>
                           <p className="text-[9px] font-black tracking-wider text-unity-gold uppercase leading-none">Unity Small Finance Bank</p>
-                          <p className="text-[6px] text-white/50 tracking-widest uppercase leading-none mt-1">Pearl Business Credit</p>
+                          <p className="text-[6px] text-white/50 tracking-widest uppercase leading-none mt-1">Pearl Premium Credit</p>
                         </div>
                         <div className="flex items-center gap-1 bg-white/10 px-1.5 py-0.5 rounded text-[8px] font-bold border border-white/10 text-unity-gold">
                           <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -381,7 +413,7 @@ export default function Dashboard() {
                       <div className="flex justify-between items-end mt-1">
                         <div>
                           <p className="text-[5px] text-white/40 uppercase tracking-widest">Card Holder</p>
-                          <p className="text-[10px] font-bold tracking-wide uppercase text-white/90">Rohan Mehta</p>
+                          <p className="text-[10px] font-bold tracking-wide uppercase text-white/90">Astha Singh</p>
                         </div>
                         <div className="text-right">
                           <span className="text-[9px] font-black italic tracking-wide text-white/90">RuPay</span>
@@ -398,26 +430,15 @@ export default function Dashboard() {
                       <div className="space-y-1.5 text-xs">
                         <div className="flex justify-between">
                           <span className="text-unity-slate/60">Total Limit</span>
-                          <span className="font-bold text-unity-slate">₹3,00,000</span>
+                          <span className="font-bold text-unity-slate">₹1,50,000</span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-unity-slate/60">Utilized Limit</span>
-                          <span className="font-bold text-unity-slate">₹45,000</span>
+                          <span className="font-bold text-unity-slate">₹18,000</span>
                         </div>
                         <div className="w-full bg-slate-100 rounded-full h-1.5 mt-1">
-                          <div className="bg-unity-gold-dark h-1.5 rounded-full" style={{ width: '15%' }}></div>
+                          <div className="bg-unity-gold-dark h-1.5 rounded-full" style={{ width: '12%' }}></div>
                         </div>
-                      </div>
-                    </div>
-                    
-                    <div className="border-t border-gray-100/70 pt-3">
-                      <div className="flex justify-between gap-2 text-[10px]">
-                        <button className="flex-1 bg-slate-50 hover:bg-slate-100 text-unity-slate font-bold py-1.5 px-2 rounded border border-slate-200 uppercase tracking-wider text-center transition-colors">
-                          Reset PIN
-                        </button>
-                        <button className="flex-1 bg-red-50 hover:bg-red-100 text-red-600 font-bold py-1.5 px-2 rounded border border-red-200 uppercase tracking-wider text-center transition-colors">
-                          Block Card
-                        </button>
                       </div>
                     </div>
                   </div>
@@ -475,50 +496,50 @@ export default function Dashboard() {
                     <div className="mt-4 space-y-3 animate-fadeIn">
                       <div className="bg-gradient-to-r from-amber-50/50 to-white border-2 border-unity-gold-border rounded-lg p-4">
                         <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-extrabold text-unity-slate text-xs">Pre-Approved Business Growth Loan</h4>
+                          <h4 className="font-extrabold text-unity-slate text-xs">Pearl Premium Credit Card Upgrade</h4>
                           <span className="px-2 py-0.5 bg-unity-gold text-unity-slate rounded-full text-[9px] font-bold">PRE-APPROVED</span>
                         </div>
                         <div className="grid grid-cols-2 gap-3 text-xs text-unity-slate/85">
                           <div>
-                            <p className="text-unity-slate/50">Amount</p>
-                            <p className="font-bold text-unity-slate">₹5,00,000</p>
+                            <p className="text-unity-slate/50">Pre-Approved Limit</p>
+                            <p className="font-bold text-unity-slate">₹2,50,000</p>
                           </div>
                           <div>
-                            <p className="text-unity-slate/50">Interest Rate</p>
-                            <p className="font-bold text-unity-slate">14.5% p.a.</p>
+                            <p className="text-unity-slate/50">Card Tier</p>
+                            <p className="font-bold text-unity-slate">Pearl Premium (RuPay)</p>
                           </div>
                           <div>
-                            <p className="text-unity-slate/50">Tenure</p>
-                            <p className="font-bold text-unity-slate">24 months</p>
+                            <p className="text-unity-slate/50">Annual Fees</p>
+                            <p className="font-bold text-unity-slate">Lifetime Free (NIL)</p>
                           </div>
                           <div>
-                            <p className="text-unity-slate/50">Processing Fee</p>
-                            <p className="font-bold text-unity-slate">₹4,999 (Discounted)</p>
+                            <p className="text-unity-slate/50">Lead ID</p>
+                            <p className="font-bold text-unity-slate">CC98024</p>
                           </div>
                         </div>
                       </div>
 
                       <div className="bg-gradient-to-r from-slate-50 to-white border border-slate-300 rounded-lg p-4">
                         <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-extrabold text-unity-slate text-xs">Business Expansion Overdraft</h4>
+                          <h4 className="font-extrabold text-unity-slate text-xs">Locker Rental Privilege</h4>
                           <span className="px-2 py-0.5 bg-slate-200 text-unity-slate rounded-full text-[9px] font-bold">ELIGIBLE</span>
                         </div>
                         <div className="grid grid-cols-2 gap-3 text-xs text-unity-slate/85">
                           <div>
-                            <p className="text-unity-slate/50">Limit Amount</p>
-                            <p className="font-bold text-unity-slate">₹3,00,000</p>
+                            <p className="text-unity-slate/50">Locker Size</p>
+                            <p className="font-bold text-unity-slate">Medium Locker</p>
                           </div>
                           <div>
-                            <p className="text-unity-slate/50">Interest Rate</p>
-                            <p className="font-bold text-unity-slate">12.0% p.a.</p>
+                            <p className="text-unity-slate/50">Special Discount</p>
+                            <p className="font-bold text-emerald-600">25% Rental Off</p>
                           </div>
                           <div>
-                            <p className="text-unity-slate/50">Tenure</p>
-                            <p className="font-bold text-unity-slate">Annual Renewal</p>
+                            <p className="text-unity-slate/50">Validity</p>
+                            <p className="font-bold text-unity-slate">Pearl Program Benefit</p>
                           </div>
                           <div>
-                            <p className="text-unity-slate/50">Processing Fee</p>
-                            <p className="font-bold text-unity-slate">1% + GST</p>
+                            <p className="text-unity-slate/50">Allotment Branch</p>
+                            <p className="font-bold text-unity-slate">Worli Branch, Mumbai</p>
                           </div>
                         </div>
                       </div>
@@ -536,11 +557,11 @@ export default function Dashboard() {
                 <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover">
                   <h2 className="text-base font-extrabold text-unity-slate mb-4 flex items-center gap-2 uppercase tracking-wider">
                     <TrendingUp className="w-5 h-5 text-unity-gold-dark" />
-                    AI-Powered Insights
+                    Relationship Diagnostics & Triggers
                   </h2>
                   
                   <p className="text-[10px] font-bold text-unity-slate/50 mb-4 uppercase tracking-wider">
-                    UNITY AI ENGINE • Real-time Stream
+                    REAL-TIME ENGAGEMENT STREAM
                   </p>
 
                   <div className="space-y-3">
@@ -572,7 +593,7 @@ export default function Dashboard() {
                     onClick={handleBuildOffer}
                     className="w-full mt-4 bg-gradient-to-r from-unity-slate to-unity-slate-light text-white font-bold py-2.5 rounded-lg transition-all duration-300 cursor-pointer shadow-xs text-xs uppercase tracking-wider animate-pulse-slow"
                   >
-                    Start Business Loan Journey
+                    Start Personal Loan Journey
                   </button>
                 </div>
               </div>
@@ -669,74 +690,14 @@ export default function Dashboard() {
                       <span className="font-bold text-unity-slate">{customerExtended.preferences.language}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-unity-slate/60 font-semibold">Digital Propensity</span>
-                      <span className="font-bold text-emerald-600">{customerExtended.preferences.digitalPreference}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-unity-slate/60 font-semibold">Customer Segment</span>
+                      <span className="text-unity-slate/60 font-semibold">Customer Persona</span>
                       <span className="font-bold text-unity-slate-light">{customerExtended.persona}</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Linked Accounts & Risk Metrics */}
-              <div className="grid lg:grid-cols-2 gap-6 mt-6 animate-fadeIn">
-                <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover">
-                  <h2 className="text-base font-extrabold text-unity-slate mb-4 flex items-center gap-2 uppercase tracking-wider">
-                    <Users className="w-5 h-5 text-unity-gold-dark" />
-                    Linked Accounts
-                  </h2>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-xs font-bold text-unity-slate/50 uppercase mb-2">Co-Borrowers & Directors</p>
-                      {customerExtended.linkedAccounts.coBorrowers.map((borrower, idx) => (
-                        <div key={idx} className="flex items-center gap-2 p-2 bg-slate-50 border border-slate-200/50 rounded-lg">
-                          <User className="w-4 h-4 text-unity-slate/60" />
-                          <span className="text-xs text-unity-slate font-medium">{borrower}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-unity-slate/50 uppercase mb-2">High-Yield Deposit Portfolio</p>
-                      <div className="space-y-2">
-                        {customerExtended.linkedAccounts.deposits.map((deposit, idx) => (
-                          <div key={idx} className="flex items-center gap-2 p-2 bg-amber-50/30 border border-unity-gold-border/40 rounded-lg">
-                            <Landmark className="w-4 h-4 text-unity-gold-dark" />
-                            <span className="text-xs text-unity-slate font-medium">{deposit}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover">
-                  <h2 className="text-base font-extrabold text-unity-slate mb-4 flex items-center gap-2 uppercase tracking-wider">
-                    <Shield className="w-5 h-5 text-unity-gold-dark" />
-                    Risk Matrix & Delinquency checks
-                  </h2>
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="p-3 bg-emerald-50 border border-emerald-100 rounded-lg text-center">
-                        <p className="text-2xl font-black text-emerald-700">{customerExtended.alerts.bureauTriggers}</p>
-                        <p className="text-[10px] text-emerald-950 font-bold uppercase mt-1">Bureau Alerts</p>
-                      </div>
-                      <div className="p-3 bg-emerald-50 border border-emerald-100 rounded-lg text-center">
-                        <p className="text-2xl font-black text-emerald-700">{customerExtended.alerts.dpd}</p>
-                        <p className="text-[10px] text-emerald-950 font-bold uppercase mt-1">Days Past Due</p>
-                      </div>
-                    </div>
-                    <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center gap-3">
-                      <Shield className="w-6 h-6 text-emerald-600 flex-shrink-0" />
-                      <div>
-                        <p className="font-extrabold text-emerald-950 text-xs uppercase">Underwriting Clearance</p>
-                        <p className="text-[10px] text-emerald-800 leading-tight">Verified clean repayment track. Zero default signals. Recommended for automated approval.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
               {/* Analytics & Insights Charts */}
               <div className="grid lg:grid-cols-2 gap-6 mt-6">
@@ -744,7 +705,7 @@ export default function Dashboard() {
                 <div className="bg-white rounded-2xl shadow-sm p-5 border border-unity-gold-border/50 card-hover">
                   <h3 className="text-base font-extrabold text-unity-slate mb-4 uppercase tracking-wider flex items-center gap-2">
                     <BarChart2 className="w-5 h-5 text-unity-gold-dark" />
-                    Business Outflow Distribution
+                    Transaction Behavior (Spend Analyzer)
                   </h3>
                   <div className="h-60">
                     <ResponsiveContainer width="100%" height="100%">
@@ -851,28 +812,28 @@ export default function Dashboard() {
                 {/* Left Two Columns: Offer Cards */}
                 <div className="lg:col-span-2 space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
-                    {/* Business Growth Loan */}
+                    {/* Pearl Premium Credit Card Upgrade */}
                     <div className="bg-gradient-to-br from-amber-50/50 via-[#FFFDF5] to-white border-2 border-unity-gold-border rounded-xl p-5 shadow-sm card-hover">
                       <div className="flex items-center justify-between mb-3 border-b border-unity-gold-border/50 pb-2">
-                        <h3 className="text-base font-extrabold text-unity-slate">Business Growth Loan</h3>
+                        <h3 className="text-base font-extrabold text-unity-slate">Premium Card Upgrade</h3>
                         <span className="px-2.5 py-0.5 bg-unity-gold text-unity-slate rounded-full text-[10px] font-bold">PRE-APPROVED</span>
                       </div>
                       <div className="grid grid-cols-2 gap-3 mb-4 text-xs text-unity-slate/85">
                         <div>
-                          <p className="text-unity-slate/50 font-semibold uppercase">Offered Limit</p>
-                          <p className="text-lg font-black text-unity-slate">₹5,00,000</p>
+                          <p className="text-unity-slate/50 font-semibold uppercase">Pre-Approved Limit</p>
+                          <p className="text-lg font-black text-unity-slate">₹2,50,000</p>
                         </div>
                         <div>
-                          <p className="text-unity-slate/50 font-semibold uppercase">Interest Rate</p>
-                          <p className="text-lg font-black text-unity-gold-dark">14.5% p.a.</p>
+                          <p className="text-unity-slate/50 font-semibold uppercase">Card Tier</p>
+                          <p className="text-lg font-black text-unity-gold-dark">Pearl Premium</p>
                         </div>
                         <div>
-                          <p className="text-unity-slate/50 font-semibold uppercase">Tenure</p>
-                          <p className="text-sm font-bold text-unity-slate">24 months</p>
+                          <p className="text-unity-slate/50 font-semibold uppercase">Annual Fee</p>
+                          <p className="text-sm font-bold text-unity-slate">NIL (Lifetime Free)</p>
                         </div>
                         <div>
-                          <p className="text-unity-slate/50 font-semibold uppercase">Processing Fee</p>
-                          <p className="text-sm font-bold text-unity-slate">₹4,999</p>
+                          <p className="text-unity-slate/50 font-semibold uppercase">Lead ID</p>
+                          <p className="text-sm font-bold text-unity-slate">CC98024</p>
                         </div>
                       </div>
                       <button 
@@ -883,33 +844,33 @@ export default function Dashboard() {
                       </button>
                     </div>
 
-                    {/* Business Overdraft Limit */}
+                    {/* Locker Rental Privilege */}
                     <div className="bg-white border-2 border-unity-gold-border/40 rounded-xl p-5 shadow-sm card-hover">
                       <div className="flex items-center justify-between mb-3 border-b border-gray-100 pb-2">
-                        <h3 className="text-base font-extrabold text-unity-slate">Business Overdraft Limit</h3>
+                        <h3 className="text-base font-extrabold text-unity-slate">Locker Rental Privilege</h3>
                         <span className="px-2.5 py-0.5 bg-slate-100 text-unity-slate border border-slate-200 rounded-full text-[10px] font-bold">ELIGIBLE</span>
                       </div>
                       <div className="grid grid-cols-2 gap-3 mb-4 text-xs text-unity-slate/85">
                         <div>
-                          <p className="text-unity-slate/50 font-semibold uppercase">Pre-approved Overdraft</p>
-                          <p className="text-lg font-black text-unity-slate">₹3,00,000</p>
+                          <p className="text-unity-slate/50 font-semibold uppercase">Locker Size</p>
+                          <p className="text-lg font-black text-unity-slate">Medium Locker</p>
                         </div>
                         <div>
-                          <p className="text-unity-slate/50 font-semibold uppercase">Interest Rate</p>
-                          <p className="text-lg font-black text-unity-slate">12.0% p.a.</p>
+                          <p className="text-unity-slate/50 font-semibold uppercase">Special Discount</p>
+                          <p className="text-lg font-black text-emerald-600">25% Off</p>
                         </div>
                         <div>
                           <p className="text-unity-slate/50 font-semibold uppercase">Validity</p>
-                          <p className="text-sm font-bold text-unity-slate">12 Months (FD Backed)</p>
+                          <p className="text-sm font-bold text-unity-slate">Pearl Program</p>
                         </div>
                         <div>
-                          <p className="text-unity-slate/50 font-semibold uppercase">Processing Fee</p>
-                          <p className="text-sm font-bold text-unity-slate">1% + GST</p>
+                          <p className="text-unity-slate/50 font-semibold uppercase">Allocation Branch</p>
+                          <p className="text-sm font-bold text-unity-slate">Worli Branch</p>
                         </div>
                       </div>
                       <button 
                         onClick={() => {
-                          alert('Eligibility Confirmed: Overdraft against Fixed Deposit limit verified for Rohan Mehta.');
+                          alert('Eligibility Confirmed: Special 25% discount on Locker rental allocated under Pearl Savings Account for Astha Singh.');
                         }}
                         className="w-full bg-white border border-unity-gold text-unity-gold-dark hover:bg-amber-50/20 py-2.5 rounded-lg font-bold transition-all text-xs uppercase tracking-wider cursor-pointer"
                       >
@@ -924,10 +885,10 @@ export default function Dashboard() {
                     <div className="space-y-2.5">
                       <div className="flex justify-between items-center p-3 bg-slate-50 border border-slate-200/50 rounded-lg text-xs">
                         <div>
-                          <p className="font-bold text-unity-slate">Current Business Account (CA)</p>
-                          <p className="text-[10px] text-unity-slate/60">A/C: XXXX321456 • Active Credit Card Linked</p>
+                          <p className="font-bold text-unity-slate">Savings Account (Pearl Program)</p>
+                          <p className="text-[10px] text-unity-slate/60">A/C: XXXX321456 • 3-in-1 Demat & Trading Linked</p>
                         </div>
-                        <span className="font-extrabold text-unity-slate">₹3,18,400</span>
+                        <span className="font-extrabold text-unity-slate">₹4,25,000</span>
                       </div>
                       <div className="flex justify-between items-center p-3 bg-slate-50 border border-slate-200/50 rounded-lg text-xs">
                         <div>
@@ -944,10 +905,10 @@ export default function Dashboard() {
                 <div className="bg-gradient-to-br from-amber-50/40 via-[#FFFDF7] to-white border-2 border-unity-gold-border rounded-2xl p-5 shadow-sm card-hover">
                   <h3 className="text-xs font-extrabold text-unity-slate uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
                     <Activity className="w-4 h-4 text-unity-gold-dark" />
-                    CLTV Optimizer Workbench
+                    Pearl Relationship Optimizer
                   </h3>
                   <p className="text-[10px] text-unity-slate/60 leading-relaxed mb-4">
-                    Select additional relationship enhancers to calculate projected customer lifetime value and bank yield.
+                    Select additional relationship enhancers to calculate projected Primary Bank Index and Relationship Value (TRV).
                   </p>
 
                   {/* Checkbox inputs */}
@@ -968,39 +929,39 @@ export default function Dashboard() {
                     <label className="flex items-start gap-2.5 p-2 bg-white border border-unity-gold-border/60 rounded-lg cursor-pointer hover:bg-[#FFFDF3] transition-colors text-xs text-unity-slate">
                       <input 
                         type="checkbox" 
-                        checked={supplyChainOpt}
-                        onChange={() => setSupplyChainOpt(!supplyChainOpt)}
+                        checked={lockerOpt}
+                        onChange={() => setLockerOpt(!lockerOpt)}
                         className="mt-0.5 rounded border-unity-gold text-unity-gold-dark focus:ring-unity-gold"
                       />
                       <div>
-                        <p className="font-bold leading-tight">Link Supply Chain Facility</p>
-                        <p className="text-[9px] text-unity-slate/50 mt-0.5">₹15L limit pre-approved credit</p>
+                        <p className="font-bold leading-tight">Book Locker Facility</p>
+                        <p className="text-[9px] text-unity-slate/50 mt-0.5">Medium locker with 25% Pearl discount</p>
                       </div>
                     </label>
 
                     <label className="flex items-start gap-2.5 p-2 bg-white border border-unity-gold-border/60 rounded-lg cursor-pointer hover:bg-[#FFFDF3] transition-colors text-xs text-unity-slate">
                       <input 
                         type="checkbox" 
-                        checked={creditCardOpt}
-                        onChange={() => setCreditCardOpt(!creditCardOpt)}
+                        checked={dematOpt}
+                        onChange={() => setDematOpt(!dematOpt)}
                         className="mt-0.5 rounded border-unity-gold text-unity-gold-dark focus:ring-unity-gold"
                       />
                       <div>
-                        <p className="font-bold leading-tight">Issue RuPay Credit Card</p>
-                        <p className="text-[9px] text-unity-slate/50 mt-0.5">₹2L limit, 1.5% reward structures</p>
+                        <p className="font-bold leading-tight">Activate Demat & Trading</p>
+                        <p className="text-[9px] text-unity-slate/50 mt-0.5">Completes the 3-in-1 retail account stack</p>
                       </div>
                     </label>
 
                     <label className="flex items-start gap-2.5 p-2 bg-white border border-unity-gold-border/60 rounded-lg cursor-pointer hover:bg-[#FFFDF3] transition-colors text-xs text-unity-slate">
                       <input 
                         type="checkbox" 
-                        checked={whatsappAlertsOpt}
-                        onChange={() => setWhatsappAlertsOpt(!whatsappAlertsOpt)}
+                        checked={insuranceOpt}
+                        onChange={() => setInsuranceOpt(!insuranceOpt)}
                         className="mt-0.5 rounded border-unity-gold text-unity-gold-dark focus:ring-unity-gold"
                       />
                       <div>
-                        <p className="font-bold leading-tight">Enable WhatsApp Alerts</p>
-                        <p className="text-[9px] text-unity-slate/50 mt-0.5">Increases digital index & active touchpoints</p>
+                        <p className="font-bold leading-tight">Add Term & Health Insurance</p>
+                        <p className="text-[9px] text-unity-slate/50 mt-0.5">Bundled premium protection cover</p>
                       </div>
                     </label>
                   </div>
@@ -1008,12 +969,12 @@ export default function Dashboard() {
                   {/* Calculations output */}
                   <div className="bg-white border border-unity-gold-border rounded-xl p-4 text-xs text-unity-slate space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-unity-slate/60 font-semibold">Forecasted CLTV Score</span>
-                      <span className="text-sm font-black text-unity-gold-dark">{calcCLTVScore()}/100</span>
+                      <span className="text-unity-slate/60 font-semibold">Forecasted Primary Bank Index</span>
+                      <span className="text-sm font-black text-unity-gold-dark">{calcPrimaryBankIndex()}%</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-unity-slate/60 font-semibold">Projected Annual Yield</span>
-                      <span className="text-sm font-black text-unity-slate">₹{calcAnnualYield().toLocaleString()}</span>
+                      <span className="text-unity-slate/60 font-semibold">Projected TRV</span>
+                      <span className="text-sm font-black text-unity-slate">{calcTRVValue()}</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-unity-slate/60 font-semibold">New PPC Index</span>
@@ -1022,7 +983,7 @@ export default function Dashboard() {
                     
                     {/* Progress bar */}
                     <div className="w-full bg-slate-100 rounded-full h-1.5 mt-2">
-                      <div className="bg-emerald-500 h-1.5 rounded-full transition-all duration-300" style={{ width: `${calcCLTVScore()}%` }}></div>
+                      <div className="bg-emerald-500 h-1.5 rounded-full transition-all duration-300" style={{ width: `${calcPrimaryBankIndex()}%` }}></div>
                     </div>
                   </div>
                 </div>
