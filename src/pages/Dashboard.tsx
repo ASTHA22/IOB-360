@@ -351,7 +351,7 @@ export default function Dashboard() {
                     <div className="space-y-3 mt-1">
                       <div className="flex items-center gap-2.5 p-2.5 bg-gradient-to-r from-amber-50/50 to-white rounded-lg border border-unity-gold-border/60">
                         <div className="w-8 h-8 bg-unity-gold/15 border border-unity-gold-border rounded-lg flex items-center justify-center flex-shrink-0">
-                          <span className="text-unity-gold-dark font-extrabold text-xs">SB</span>
+                          <span className="text-unity-gold-dark font-extrabold text-xs">SA</span>
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-bold text-unity-slate text-xs">Savings Account (Pearl Program)</p>
