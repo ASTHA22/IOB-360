@@ -56,7 +56,7 @@ export const customerExtended = {
     ewsFlags: []
   },
   persona: 'Tech Professional - High Affluence with Growth Orientation',
-  branch: 'Cathedral Branch, Chennai (Central Zone)',
+  branch: 'Cathedral Branch, Chennai',
   managedBy: {
     name: 'Rajesh Kumar',
     phone: '+91 94440 12345'
