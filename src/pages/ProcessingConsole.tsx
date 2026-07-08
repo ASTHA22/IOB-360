@@ -204,11 +204,11 @@ export default function ProcessingConsole() {
             </div>
           </div>
 
-          <div className="p-6 bg-slate-950 min-h-[500px]">
-            <div className="font-mono text-xs text-slate-300 space-y-4 max-h-[600px] overflow-y-auto pr-2">
+          <div className="p-6 bg-slate-50 min-h-[500px]">
+            <div className="font-mono text-xs text-slate-700 space-y-4 max-h-[600px] overflow-y-auto pr-2">
               {logs.map((log) => (
-                <div key={log.id} className="border-b border-slate-900 pb-3 flex items-start gap-4 animate-fadeIn">
-                  <div className="flex items-center gap-1.5 text-slate-500 text-[10px] whitespace-nowrap pt-0.5">
+                <div key={log.id} className="border-b border-slate-200/60 pb-3 flex items-start gap-4 animate-fadeIn">
+                  <div className="flex items-center gap-1.5 text-slate-455 text-[10px] whitespace-nowrap pt-0.5">
                     <Clock className="w-3.5 h-3.5" />
                     <span>{log.timestamp.toLocaleTimeString()}</span>
                   </div>
@@ -216,27 +216,27 @@ export default function ProcessingConsole() {
                   <div className="flex-1 space-y-1">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${
-                        log.status === 'success' ? 'bg-emerald-950 text-emerald-400 border border-emerald-900/50' :
-                        log.status === 'error' ? 'bg-rose-950 text-rose-400 border border-rose-900/50' :
-                        log.status === 'warning' ? 'bg-amber-950 text-amber-400 border border-amber-900/50' :
-                        'bg-slate-900 text-slate-400 border border-slate-800'
+                        log.status === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
+                        log.status === 'error' ? 'bg-rose-50 text-rose-700 border border-rose-200' :
+                        log.status === 'warning' ? 'bg-amber-50 text-amber-700 border border-amber-200' :
+                        'bg-blue-50 text-blue-700 border border-blue-200'
                       }`}>
                         {log.event.toUpperCase()}
                       </span>
                       {log.channel && (
-                        <span className="bg-iob-blue/20 text-iob-blue-light border border-iob-blue-border/20 text-[9px] font-bold px-1.5 py-0.5 rounded">
+                        <span className="bg-iob-blue/10 text-iob-blue-accent border border-iob-blue-border/20 text-[9px] font-bold px-1.5 py-0.5 rounded">
                           {log.channel}
                         </span>
                       )}
                     </div>
-                    <p className="text-white text-xs leading-relaxed">{log.details}</p>
+                    <p className="text-slate-900 text-xs leading-relaxed">{log.details}</p>
                   </div>
 
                   <div>
-                    {log.status === 'success' && <CheckCircle className="w-4 h-4 text-emerald-500" />}
-                    {log.status === 'error' && <AlertCircle className="w-4 h-4 text-rose-500" />}
-                    {log.status === 'warning' && <Zap className="w-4 h-4 text-amber-500 animate-pulse" />}
-                    {log.status === 'info' && <MessageSquare className="w-4 h-4 text-iob-blue-light" />}
+                    {log.status === 'success' && <CheckCircle className="w-4 h-4 text-emerald-600" />}
+                    {log.status === 'error' && <AlertCircle className="w-4 h-4 text-rose-600" />}
+                    {log.status === 'warning' && <Zap className="w-4 h-4 text-amber-600 animate-pulse" />}
+                    {log.status === 'info' && <MessageSquare className="w-4 h-4 text-iob-blue-accent" />}
                   </div>
                 </div>
               ))}
