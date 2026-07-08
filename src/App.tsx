@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import MobileLoanFlow from './pages/MobileLoanFlow';
 import Dashboard from './pages/Dashboard';
 import ProcessingConsole from './pages/ProcessingConsole';
+import IOBBuddyWidget from './components/IOBBuddyWidget';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/console" element={<ProcessingConsole />} />
           </Routes>
+          <IOBBuddyWidget />
         </div>
     </Router>
     </SimulationProvider>
