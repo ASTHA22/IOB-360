@@ -353,6 +353,16 @@ export default function Dashboard() {
                         </div>
                         <span className="font-bold text-iob-slate text-xs flex-shrink-0">₹3,80,000</span>
                       </div>
+                      <div className="flex items-center gap-2.5 p-2.5 bg-gradient-to-r from-iob-blue-light/50 to-white rounded-lg border border-iob-blue-border/60">
+                        <div className="w-8 h-8 bg-iob-blue/15 border border-iob-blue-border rounded-lg flex items-center justify-center flex-shrink-0">
+                          <span className="text-iob-blue-accent font-extrabold text-xs">FD</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-bold text-iob-slate text-xs">Term Deposit (FD - Renewal Due)</p>
+                          <p className="text-[10px] text-iob-slate/70 truncate">A/C: XXXX98012 • 9.0% p.a. • Matures in 15 days</p>
+                        </div>
+                        <span className="px-2 py-0.5 bg-rose-50 text-rose-700 border border-rose-200 rounded-full text-[9px] font-bold flex-shrink-0">15D RENEW</span>
+                      </div>
                       <div className="flex items-center gap-2.5 p-2.5 bg-gradient-to-r from-iob-blue-light/70 to-white rounded-lg border border-iob-blue-border/80">
                         <div className="w-8 h-8 bg-iob-blue/20 border border-iob-blue-border rounded-lg flex items-center justify-center flex-shrink-0">
                           <span className="text-iob-blue-accent font-extrabold text-xs">CC</span>
