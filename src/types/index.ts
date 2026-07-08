@@ -63,3 +63,18 @@ export interface CreditProduct {
   tenure: string;
   status: string;
 }
+
+export interface CustomerAttribute {
+  id: string;
+  name: string;
+  value: string;
+  definition: string;
+  source: string;
+  dataOwner: string;
+  intendedUsage: string;
+  purposeTags: string[];
+  consentStatus: 'Active' | 'Withdrawn' | 'Not Captured';
+  consentTimestamp: string;
+  consentRefId: string;
+}
+

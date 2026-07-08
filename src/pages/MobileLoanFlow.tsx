@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, Send, Activity, Info } from 'lucide-react';
 import { useSimulation } from '../context/SimulationContext';
-import UnityLogo from '../components/UnityLogo';
+import IOBLogo from '../components/IOBLogo';
 import { mockLoanApplication } from '../services/mockData';
 
 type Screen = 'otp' | 'review' | 'chat' | 'processing' | 'success';
 
 interface ChatMessage {
-  sender: 'mitra' | 'user';
+  sender: 'buddy' | 'user';
   text: string;
 }
 
@@ -18,7 +18,7 @@ export default function MobileLoanFlow() {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [progress, setProgress] = useState(0);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
-    { sender: 'mitra', text: `Hi Astha! 👋 I see you're applying for a ₹5L Personal Loan. Let me help you finalize this!` }
+    { sender: 'buddy', text: `Hi Astha! 👋 I see you're applying for an IOB pre-approved ₹6L Personal Loan. IOB Buddy is here to help you finalize this!` }
   ]);
 
   // Sync with global context
@@ -54,9 +54,9 @@ export default function MobileLoanFlow() {
         setChatMessages(prev => [...prev, { sender: 'user', text: 'Yes, please proceed with the application' }]);
       }, 2000);
       const timer2 = setTimeout(() => {
-        setChatMessages(prev => [...prev, { sender: 'mitra', text: 'Perfect! Your application parameters are RBI-compliant. Starting final credit scoring now...' }]);
+        setChatMessages(prev => [...prev, { sender: 'buddy', text: 'Perfect! Your application parameters are RBI-compliant. Salary credit verification & LOS employer overrides checked in SSOT. Starting final credit scoring now...' }]);
       }, 3500);
-      const timer3 = setTimeout(() => setCurrentScreen('processing'), 5000);
+      const timer3 = setTimeout(() => setCurrentScreen('processing'), 6000);
       return () => {
         clearTimeout(timer1);
         clearTimeout(timer2);
@@ -82,8 +82,8 @@ export default function MobileLoanFlow() {
   }, [currentScreen]);
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] p-6 text-unity-slate">
-      <Link to="/" className="text-unity-gold-dark hover:underline text-xs font-bold flex items-center gap-1 mb-6">
+    <div className="min-h-screen bg-[#FAF9F6] p-6 text-iob-slate">
+      <Link to="/" className="text-iob-blue hover:underline text-xs font-bold flex items-center gap-1 mb-6">
         <ArrowLeft className="w-4 h-4" />
         BACK TO CORE SYSTEM
       </Link>
@@ -91,45 +91,46 @@ export default function MobileLoanFlow() {
       <div className="flex flex-col lg:flex-row gap-6 max-w-7xl mx-auto items-start">
         {/* LEFT: Mobile Phone */}
         <div className="w-full md:w-96 flex-shrink-0 mx-auto lg:mx-0">
-          <div className="bg-unity-slate rounded-[3rem] p-3 shadow-xl border-4 border-slate-700">
+          <div className="bg-iob-blue rounded-[3rem] p-3 shadow-xl border-4 border-slate-700">
             <div className="bg-[#FAF9F6] rounded-[2.5rem] overflow-hidden" style={{ height: '700px' }}>
               <div className="h-full flex flex-col relative">
+                
                 {/* OTP Screen */}
                 {currentScreen === 'otp' && (
                   <div className="h-full flex flex-col bg-white p-8 justify-between">
                     <div>
                       <div className="flex items-center justify-center gap-2 mb-8 mt-2">
-                        <UnityLogo className="w-8 h-8" />
-                        <p className="text-[10px] font-bold text-unity-slate/70 tracking-widest uppercase">UNITY MOBILE</p>
+                        <IOBLogo className="w-8 h-8" />
+                        <p className="text-[10px] font-bold text-iob-slate/75 tracking-widest uppercase">IOB MOBILE</p>
                       </div>
 
-                      <h2 className="text-xl font-black text-unity-slate mb-2">Verify Identity</h2>
-                      <p className="text-xs text-unity-slate/70 mb-8 leading-relaxed">
+                      <h2 className="text-xl font-black text-iob-slate mb-2">Verify Identity</h2>
+                      <p className="text-xs text-iob-slate/70 mb-8 leading-relaxed">
                         We sent a 6-digit verification code to your registered mobile<br />
-                        <span className="font-bold text-unity-slate">+91 98004 XX789</span>
+                        <span className="font-bold text-iob-slate">+91 98004 XX789</span>
                       </p>
 
                       <div className="flex gap-2.5 justify-center mb-8">
                         {otp.map((digit, index) => (
                           <div
                             key={index}
-                            className="w-10 h-12 flex items-center justify-center text-xl font-black border-2 border-unity-gold rounded-lg bg-unity-gold-light"
+                            className="w-10 h-12 flex items-center justify-center text-xl font-black border-2 border-iob-blue rounded-lg bg-iob-blue-light"
                           >
                             {digit}
                           </div>
                         ))}
                       </div>
 
-                      <p className="text-xs text-unity-slate/60 text-center">
-                        Did not receive? <span className="text-unity-gold-dark font-bold cursor-pointer hover:underline">Resend OTP</span>
+                      <p className="text-xs text-iob-slate/60 text-center">
+                        Did not receive? <span className="text-iob-blue font-bold cursor-pointer hover:underline">Resend OTP</span>
                       </p>
                     </div>
 
                     <div className="space-y-2">
-                      <button className="w-full bg-unity-slate text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-unity-slate-light transition-colors">
+                      <button className="w-full bg-iob-blue text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-iob-blue-dark transition-colors">
                         Confirm and Verify
                       </button>
-                      <button className="w-full border border-slate-200 text-unity-slate/70 py-3 rounded-xl font-bold text-xs uppercase tracking-wider">
+                      <button className="w-full border border-slate-200 text-iob-slate/70 py-3 rounded-xl font-bold text-xs uppercase tracking-wider">
                         Back
                       </button>
                     </div>
@@ -141,47 +142,47 @@ export default function MobileLoanFlow() {
                   <div className="h-full flex flex-col bg-white overflow-y-auto p-6 justify-between">
                     <div>
                       <div className="flex items-center justify-center gap-2 mb-6">
-                        <UnityLogo className="w-6 h-6" />
-                        <p className="text-[9px] font-bold text-unity-slate/70 tracking-widest uppercase">UNITY MOBILE</p>
+                        <IOBLogo className="w-6 h-6" />
+                        <p className="text-[9px] font-bold text-iob-slate/75 tracking-widest uppercase">IOB MOBILE</p>
                       </div>
 
-                      <h2 className="text-lg font-black text-unity-slate mb-4">Review Terms</h2>
+                      <h2 className="text-lg font-black text-iob-slate mb-4">Review Terms</h2>
 
                       {/* Light Gradient Card */}
-                      <div className="bg-gradient-to-br from-unity-gold-light via-[#FFFDF6] to-white border border-unity-gold-border rounded-xl p-5 mb-4 shadow-xs">
-                        <p className="text-[10px] text-unity-slate/60 font-bold uppercase mb-1">Pre-Approved Offer</p>
-                        <p className="text-3xl font-black text-unity-slate">₹5,00,000</p>
-                        <p className="text-[10px] font-semibold text-unity-slate/70 mt-1">Unsecured Personal Loan</p>
+                      <div className="bg-gradient-to-br from-iob-blue-light/50 via-white to-white border border-iob-blue-border rounded-xl p-5 mb-4 shadow-xs">
+                        <p className="text-[10px] text-iob-slate/60 font-bold uppercase mb-1">Pre-Approved Offer</p>
+                        <p className="text-3xl font-black text-iob-blue">₹6,00,000</p>
+                        <p className="text-[10px] font-semibold text-iob-slate/70 mt-1">Unsecured Retail Personal Loan</p>
                       </div>
 
                       <div className="space-y-3 mb-6 bg-slate-50/50 p-4 border border-slate-200/50 rounded-xl text-xs">
                         <div className="flex justify-between border-b border-slate-100 pb-2">
-                          <span className="text-unity-slate/60">Interest Rate</span>
-                          <span className="font-bold text-unity-slate">{mockLoanApplication.interestRate}% p.a.</span>
+                          <span className="text-iob-slate/60">Interest Rate</span>
+                          <span className="font-bold text-iob-slate">{mockLoanApplication.interestRate}% p.a.</span>
                         </div>
                         <div className="flex justify-between border-b border-slate-100 pb-2">
-                          <span className="text-unity-slate/60">Tenure</span>
-                          <span className="font-bold text-unity-slate">{mockLoanApplication.tenure} Months</span>
+                          <span className="text-iob-slate/60">Tenure</span>
+                          <span className="font-bold text-iob-slate">{mockLoanApplication.tenure} Months</span>
                         </div>
                         <div className="flex justify-between border-b border-slate-100 pb-2">
-                          <span className="text-unity-slate/60">Monthly EMI</span>
-                          <span className="font-bold text-unity-slate">₹{mockLoanApplication.monthlyEMI.toLocaleString()}</span>
+                          <span className="text-iob-slate/60">Monthly EMI</span>
+                          <span className="font-bold text-iob-slate">₹{mockLoanApplication.monthlyEMI.toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-unity-slate/60">Processing Fee</span>
-                          <span className="font-bold text-unity-slate">₹{mockLoanApplication.processingFee.toLocaleString()}</span>
+                          <span className="text-iob-slate/60">Processing Fee</span>
+                          <span className="font-bold text-iob-slate">₹{mockLoanApplication.processingFee.toLocaleString()}</span>
                         </div>
                       </div>
 
-                      <div className="p-3 bg-amber-50/50 border border-unity-gold-border rounded-lg flex items-start gap-2 mb-4">
-                        <Info className="w-4 h-4 text-unity-gold-dark flex-shrink-0 mt-0.5" />
-                        <p className="text-[10px] text-unity-slate/85 leading-relaxed">
-                          By clicking accept, you authorize Unity SFB to trigger credit underwriting rules.
+                      <div className="p-3 bg-iob-blue-light/50 border border-iob-blue-border rounded-lg flex items-start gap-2 mb-4">
+                        <Info className="w-4 h-4 text-iob-blue-accent flex-shrink-0 mt-0.5" />
+                        <p className="text-[10px] text-iob-slate/85 leading-relaxed">
+                          By clicking accept, you authorize Indian Overseas Bank to fetch from Account Aggregator (AA) and verify credit underwriting rules.
                         </p>
                       </div>
                     </div>
 
-                    <button className="w-full bg-unity-slate text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-unity-slate-light transition-colors">
+                    <button className="w-full bg-iob-blue text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-iob-blue-dark transition-colors">
                       Accept and Proceed
                     </button>
                   </div>
@@ -192,14 +193,14 @@ export default function MobileLoanFlow() {
                   <div className="h-full flex flex-col bg-white">
                     <div className="px-4 py-3 border-b flex items-center justify-between bg-slate-50">
                       <div className="flex items-center gap-2">
-                        <UnityLogo className="w-6 h-6" />
+                        <IOBLogo className="w-6 h-6" />
                         <div>
-                          <p className="text-[10px] font-bold text-unity-slate leading-none">UNITY MOBILE</p>
+                          <p className="text-[10px] font-bold text-iob-slate leading-none">IOB MOBILE</p>
                           <p className="text-[8px] text-emerald-600 font-bold leading-none mt-1">● Online</p>
                         </div>
                       </div>
-                      <div className="bg-unity-gold/15 px-3 py-1 rounded-full border border-unity-gold-border">
-                        <span className="text-[9px] font-bold text-unity-gold-dark uppercase tracking-wider">Unity Assistant</span>
+                      <div className="bg-iob-blue/15 px-3 py-1 rounded-full border border-iob-blue-border">
+                        <span className="text-[9px] font-bold text-iob-blue-accent uppercase tracking-wider">IOB Buddy</span>
                       </div>
                     </div>
 
@@ -211,8 +212,8 @@ export default function MobileLoanFlow() {
                         >
                           <div className={`max-w-[80%] rounded-2xl p-3 text-xs leading-relaxed ${
                             msg.sender === 'user' 
-                              ? 'bg-unity-gold/15 text-unity-slate border border-unity-gold-border/60 rounded-br-none' 
-                              : 'bg-slate-100 text-unity-slate border border-slate-200 rounded-bl-none'
+                              ? 'bg-iob-blue/15 text-iob-slate border border-iob-blue-border/60 rounded-br-none' 
+                              : 'bg-slate-100 text-iob-slate border border-slate-200 rounded-bl-none'
                           }`}>
                             {msg.text}
                           </div>
@@ -225,10 +226,10 @@ export default function MobileLoanFlow() {
                         <input 
                           type="text" 
                           placeholder="Type a message..."
-                          className="flex-1 bg-transparent outline-none text-xs text-unity-slate"
+                          className="flex-1 bg-transparent outline-none text-xs text-iob-slate"
                           disabled
                         />
-                        <Send className="w-4 h-4 text-unity-slate/40" />
+                        <Send className="w-4 h-4 text-iob-slate/40" />
                       </div>
                     </div>
                   </div>
@@ -237,20 +238,20 @@ export default function MobileLoanFlow() {
                 {/* Processing Screen */}
                 {currentScreen === 'processing' && (
                   <div className="h-full flex flex-col items-center justify-center bg-white p-8">
-                    <div className="w-16 h-16 border-4 border-unity-gold border-t-transparent rounded-full animate-spin mb-6"></div>
-                    <h2 className="text-lg font-black text-unity-slate mb-2">Automated Underwriting</h2>
-                    <p className="text-xs text-unity-slate/70 text-center mb-6 leading-relaxed">
+                    <div className="w-16 h-16 border-4 border-iob-blue border-t-transparent rounded-full animate-spin mb-6"></div>
+                    <h2 className="text-lg font-black text-iob-slate mb-2">Automated Underwriting</h2>
+                    <p className="text-xs text-iob-slate/70 text-center mb-6 leading-relaxed">
                       Verifying credit bureau parameters & calculating risk headroom...
                     </p>
                     
                     <div className="w-full max-w-xs">
                       <div className="bg-slate-100 border border-slate-200 rounded-full h-3 overflow-hidden">
                         <div 
-                          className="bg-unity-gold h-full transition-all duration-300 rounded-full"
+                          className="bg-iob-blue h-full transition-all duration-300 rounded-full"
                           style={{ width: `${progress}%` }}
                         ></div>
                       </div>
-                      <p className="text-center text-[10px] font-bold text-unity-slate/60 mt-2">{progress}% Checked</p>
+                      <p className="text-center text-[10px] font-bold text-iob-slate/60 mt-2">{progress}% Checked</p>
                     </div>
                   </div>
                 )}
@@ -262,25 +263,25 @@ export default function MobileLoanFlow() {
                       <div className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center mb-4 border-2 border-emerald-300">
                         <CheckCircle className="w-10 h-10 text-white" />
                       </div>
-                      <h2 className="text-xl font-black text-unity-slate mb-2">Limit Disbursed!</h2>
-                      <p className="text-xs text-unity-slate/75 text-center mb-6 leading-relaxed">
-                        Your Unsecured Personal Loan has been approved and activated.
+                      <h2 className="text-xl font-black text-iob-slate mb-2">Limit Disbursed!</h2>
+                      <p className="text-xs text-iob-slate/75 text-center mb-6 leading-relaxed">
+                        Your Unsecured Personal Loan has been approved and activated in SSOT.
                       </p>
                       
-                      <div className="bg-gradient-to-br from-unity-gold-light via-[#FFFDF5] to-white border border-unity-gold-border rounded-xl p-4 w-full shadow-xs">
-                        <h3 className="font-bold text-unity-slate text-[10px] uppercase tracking-wider mb-2 pb-1 border-b border-unity-gold-border/40">Facility Details</h3>
+                      <div className="bg-gradient-to-br from-iob-blue-light/50 via-white to-white border border-iob-blue-border rounded-xl p-4 w-full shadow-xs">
+                        <h3 className="font-bold text-iob-slate text-[10px] uppercase tracking-wider mb-2 pb-1 border-b border-iob-blue-border/40">Facility Details</h3>
                         <div className="space-y-1.5 text-xs">
                           <div className="flex justify-between">
-                            <span className="text-unity-slate/60">Amount</span>
-                            <span className="font-bold text-unity-slate">₹{mockLoanApplication.amount.toLocaleString()}</span>
+                            <span className="text-iob-slate/60">Amount</span>
+                            <span className="font-bold text-iob-slate">₹{mockLoanApplication.amount.toLocaleString()}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-unity-slate/60">EMI Schedule</span>
-                            <span className="font-bold text-unity-slate">₹{mockLoanApplication.monthlyEMI.toLocaleString()}/mo</span>
+                            <span className="text-iob-slate/60">EMI Schedule</span>
+                            <span className="font-bold text-iob-slate">₹{mockLoanApplication.monthlyEMI.toLocaleString()}/mo</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-unity-slate/60">Tenure</span>
-                            <span className="font-bold text-unity-slate">{mockLoanApplication.tenure} Months</span>
+                            <span className="text-iob-slate/60">Tenure</span>
+                            <span className="font-bold text-iob-slate">{mockLoanApplication.tenure} Months</span>
                           </div>
                         </div>
                       </div>
@@ -288,7 +289,7 @@ export default function MobileLoanFlow() {
 
                     <button 
                       onClick={() => setCurrentScreen('otp')}
-                      className="w-full bg-unity-slate text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-unity-slate-light transition-colors mt-4"
+                      className="w-full bg-iob-blue text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-iob-blue-dark transition-colors mt-4"
                     >
                       Reset Journey
                     </button>
@@ -300,10 +301,10 @@ export default function MobileLoanFlow() {
         </div>
 
         {/* RIGHT: Backend Underwriting Logs */}
-        <div className="flex-1 bg-white rounded-2xl shadow-sm p-6 border border-unity-gold-border/50 w-full self-stretch">
+        <div className="flex-1 bg-white rounded-2xl shadow-sm p-6 border border-iob-blue-border/50 w-full self-stretch">
           <div className="flex items-center justify-between mb-6 pb-2 border-b border-gray-100">
-            <h3 className="text-base font-extrabold text-unity-slate flex items-center gap-2 uppercase tracking-wider">
-              <Activity className="w-5 h-5 text-unity-gold-dark" />
+            <h3 className="text-base font-extrabold text-iob-slate flex items-center gap-2 uppercase tracking-wider">
+              <Activity className="w-5 h-5 text-iob-blue" />
               Automated Credit Underwriting Monitor
             </h3>
             <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
@@ -315,102 +316,102 @@ export default function MobileLoanFlow() {
           <div className="space-y-3.5 max-h-[600px] overflow-y-auto pr-1 notice-popup-scrollbar">
             {/* OTP Event */}
             {['otp', 'review', 'chat', 'processing', 'success'].includes(currentScreen) && (
-              <div className="bg-amber-50/30 border-l-4 border-unity-gold rounded-r-lg p-3.5 border border-unity-gold-border/40">
+              <div className="bg-iob-blue-light/35 border-l-4 border-iob-blue rounded-r-lg p-3.5 border border-iob-blue-border">
                 <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-unity-gold-dark font-bold text-[9px] uppercase tracking-wider">KYC_VERIFY</span>
-                  <span className="text-unity-slate font-extrabold text-xs">Identity OTP Triggered</span>
+                  <span className="text-iob-blue-accent font-bold text-[9px] uppercase tracking-wider">KYC_VERIFY</span>
+                  <span className="text-iob-slate font-extrabold text-xs">Identity OTP Triggered</span>
                 </div>
-                <p className="text-unity-slate/85 text-xs">
+                <p className="text-iob-slate/85 text-xs">
                   A 6-digit mobile verification token dispatched via SMS & WhatsApp to customer +91 98004 XX789.
                 </p>
-                <p className="text-unity-slate/40 text-[9px] font-semibold mt-1">Vendor: Gupshup API • Trigger: Client_App_Init</p>
+                <p className="text-iob-slate/40 text-[9px] font-semibold mt-1">Vendor: IOB OTP Gateway • Trigger: Client_App_Init</p>
               </div>
             )}
 
             {/* KFS Event */}
             {['review', 'chat', 'processing', 'success'].includes(currentScreen) && (
-              <div className="bg-slate-50 border-l-4 border-unity-slate rounded-r-lg p-3.5 border border-slate-200">
+              <div className="bg-slate-50 border-l-4 border-iob-blue rounded-r-lg p-3.5 border border-slate-200">
                 <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-unity-slate font-bold text-[9px] uppercase tracking-wider">KFS_GENERATION</span>
-                  <span className="text-unity-slate font-extrabold text-xs">Key Fact Statement Generated & Dispatched</span>
+                  <span className="text-iob-blue font-bold text-[9px] uppercase tracking-wider">KFS_GENERATION</span>
+                  <span className="text-iob-slate font-extrabold text-xs">Key Fact Statement Generated & Dispatched</span>
                 </div>
-                <p className="text-unity-slate/85 text-xs">
-                  Calculated terms for Unsecured Personal Loan: Principal ₹5L, 24 months, 12.5% interest, EMI ₹23,650, Fee ₹4,999.
+                <p className="text-iob-slate/85 text-xs">
+                  Calculated terms for Unsecured Personal Loan: Principal ₹6L, 36 months, 11.25% interest, EMI ₹19,720, Fee ₹3,999.
                 </p>
-                <p className="text-unity-slate/40 text-[9px] font-semibold mt-1">Compliance Rule: RBI-DIR-KFS-2024 applied ✓</p>
+                <p className="text-iob-slate/40 text-[9px] font-semibold mt-1">Compliance Rule: RBI-DIR-KFS-2024 applied ✓</p>
               </div>
             )}
 
             {/* AI Routing Event */}
             {['chat', 'processing', 'success'].includes(currentScreen) && (
-              <div className="bg-[#FFFDF4]/80 border-l-4 border-unity-gold rounded-r-lg p-3.5 border border-unity-gold-border/60">
+              <div className="bg-iob-blue-light/35 border-l-4 border-iob-blue rounded-r-lg p-3.5 border border-iob-blue-border">
                 <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-unity-gold-dark font-bold text-[9px] uppercase tracking-wider">AI_COGNITIVE</span>
-                  <span className="text-unity-slate font-extrabold text-xs">Unity Assistant Route Triggered</span>
+                  <span className="text-iob-blue-accent font-bold text-[9px] uppercase tracking-wider">AI_COGNITIVE</span>
+                  <span className="text-iob-slate font-extrabold text-xs">IOB Buddy Route Triggered</span>
                 </div>
-                <p className="text-unity-slate/85 text-xs">
+                <p className="text-iob-slate/85 text-xs">
                   Customer asked about pre-payment guidelines. AI parsed query and confirmed: "Nil penalty after 6 months".
                 </p>
-                <p className="text-emerald-700 text-[9px] font-bold mt-1">Status: Customer request solved via automated intent matching ✓</p>
+                <p className="text-emerald-700 text-[9px] font-bold mt-1">Status: Customer request solved via automated intent matching (IOB Buddy) ✓</p>
               </div>
             )}
 
             {/* Processing Event */}
             {['processing', 'success'].includes(currentScreen) && (
-              <div className="bg-slate-50 border-l-4 border-unity-slate rounded-r-lg p-3.5 border border-slate-200">
+              <div className="bg-slate-50 border-l-4 border-iob-blue rounded-r-lg p-3.5 border border-slate-200">
                 <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-unity-slate font-bold text-[9px] uppercase tracking-wider">CREDIT_UNDERWRITING</span>
-                  <span className="text-unity-slate font-extrabold text-xs">Rule Engine Assessment</span>
+                  <span className="text-iob-blue font-bold text-[9px] uppercase tracking-wider">CREDIT_UNDERWRITING</span>
+                  <span className="text-iob-slate font-extrabold text-xs">Rule Engine Assessment</span>
                 </div>
-                <p className="text-unity-slate/85 text-xs mb-2">
-                  Running KYC checks, CIBIL verification (Score: 765), and debt service ratio (FOIR: 32.5%).
+                <p className="text-iob-slate/85 text-xs mb-2">
+                  Running KYC checks, CIBIL verification (Score: 782), and debt service ratio (FOIR: 28.5%).
                 </p>
                 {currentScreen === 'processing' && (
                   <div className="mt-2.5 bg-white p-2.5 rounded-lg border border-slate-200">
                     <div className="w-full bg-slate-100 rounded-full h-1.5">
                       <div 
-                        className="bg-unity-gold h-1.5 rounded-full transition-all"
+                        className="bg-iob-blue h-1.5 rounded-full transition-all"
                         style={{ width: `${progress}%` }}
                       ></div>
                     </div>
-                    <p className="text-unity-gold-dark text-[9px] font-bold mt-1.5">{progress}% credit metrics assessed</p>
+                    <p className="text-iob-blue-accent text-[9px] font-bold mt-1.5">{progress}% credit metrics assessed</p>
                   </div>
                 )}
               </div>
             )}
 
             {/* Success Event */}
-            {currentScreen === 'success' && (
+            {['success'].includes(currentScreen) && (
               <div className="bg-emerald-50 border-l-4 border-emerald-500 rounded-r-lg p-3.5 border border-emerald-200">
                 <div className="flex items-center gap-2 mb-1.5">
                   <span className="text-emerald-700 font-bold text-[9px] uppercase tracking-wider">FACILITY_DISBURSED</span>
-                  <span className="text-unity-slate font-extrabold text-xs">Loan Agreement Executed & Approved</span>
+                  <span className="text-iob-slate font-extrabold text-xs">Loan Agreement Executed & Approved</span>
                 </div>
-                <p className="text-unity-slate/85 text-xs">
-                  Instant underwriting complete. Limit activated in Core Banking System. E-mandate registered successfully.
+                <p className="text-iob-slate/85 text-xs">
+                  Instant underwriting complete. Limit activated in IOB Core Banking System. E-mandate registered successfully.
                 </p>
-                <p className="text-emerald-700 text-[9px] font-bold mt-1">Status: DISBURSED ✓ Reference: DISB-UN-890321456</p>
+                <p className="text-emerald-700 text-[9px] font-bold mt-1">Status: DISBURSED ✓ Reference: DISB-IOB-890321456</p>
               </div>
             )}
 
             {/* Additional Events */}
             <div className="bg-slate-50/50 border-l-4 border-slate-300 rounded-r-lg p-3.5 border border-slate-200/50">
               <div className="flex items-center gap-2 mb-1.5">
-                <span className="text-unity-slate/50 font-bold text-[9px] uppercase tracking-wider">BUREAU_SYNC</span>
-                <span className="text-unity-slate font-extrabold text-xs">CIBIL Bureau Fetch</span>
+                <span className="text-iob-slate/50 font-bold text-[9px] uppercase tracking-wider">BUREAU_SYNC</span>
+                <span className="text-iob-slate font-extrabold text-xs">CIBIL Bureau Fetch</span>
               </div>
-              <p className="text-unity-slate/80 text-xs">
-                Bureau score synced: 765. Zero delinquencies. Average age of active credits: 3.4 years.
+              <p className="text-iob-slate/80 text-xs">
+                Bureau score synced: 782. Zero delinquencies. Average age of active credits: 3.4 years.
               </p>
             </div>
 
             <div className="bg-slate-50/50 border-l-4 border-slate-300 rounded-r-lg p-3.5 border border-slate-200/50">
               <div className="flex items-center gap-2 mb-1.5">
-                <span className="text-unity-slate/50 font-bold text-[9px] uppercase tracking-wider">RULE_EVAL</span>
-                <span className="text-unity-slate font-extrabold text-xs">Inflow Assessment</span>
+                <span className="text-iob-slate/50 font-bold text-[9px] uppercase tracking-wider">RULE_EVAL</span>
+                <span className="text-iob-slate font-extrabold text-xs">Inflow Assessment</span>
               </div>
-              <p className="text-unity-slate/80 text-xs">
-                Evaluating savings account inflows: ₹1,50,000 average monthly inflow. Inflow to debt obligations ratio cleared.
+              <p className="text-iob-slate/80 text-xs">
+                Evaluating savings account inflows: ₹1,65,000 average monthly inflow. Inflow to debt obligations ratio cleared.
               </p>
             </div>
           </div>

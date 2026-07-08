@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-unity-gold: #F5BE18;
-  --color-unity-gold-dark: #D49D07;
-  --color-unity-gold-light: #FFFBF0;
-  --color-unity-gold-border: #F5EAC4;
-  --color-unity-slate: #2A3649;
-  --color-unity-slate-light: #4A5B75;
+  --color-iob-blue: #133D82;
+  --color-iob-blue-dark: #09214D;
+  --color-iob-blue-light: #F2F7FF;
+  --color-iob-blue-border: #D6E6FF;
+  --color-iob-blue-accent: #1C5EC2;
+  --color-iob-blue-vibrant: #2B7FFF;
+  --color-iob-slate: #0C1E36;
+  --color-iob-slate-light: #3D5370;
 }
 
 @keyframes fadeIn {
@@ -103,6 +105,6 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #FAF9F6;
-  color: #2A3649;
+  background-color: #F8FAFC;
+  color: #0C1E36;
 }
