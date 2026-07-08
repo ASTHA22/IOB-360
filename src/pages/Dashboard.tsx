@@ -262,7 +262,7 @@ export default function Dashboard() {
                       <div className="grid grid-cols-[120px_1fr] gap-2 items-center py-2.5 border-b border-slate-100">
                         <span className="text-iob-slate/60 font-semibold flex items-center gap-2 flex-shrink-0">
                           <TrendingUp className="w-3.5 h-3.5 text-iob-blue-accent flex-shrink-0" />
-                          Wallet Share
+                          Lending Share
                         </span>
                         <span className="font-semibold text-iob-slate text-right">{customerExtended.demographics.walletShare}</span>
                       </div>

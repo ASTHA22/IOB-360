@@ -143,7 +143,15 @@ export const mockTriggers: Trigger[] = [
     type: 'AI Engine',
     urgency: 'high',
     timestamp: new Date(),
-    description: 'Pre-approved for IOB Pride Metal Card upgrade. Lead ID: CC-IOB-980. Potential wallet share increase: 12%.'
+    description: 'Pre-approved for IOB Pride Metal Card upgrade. Lead ID: CC-IOB-980. Potential Lending Share increase: 12%.'
+  },
+  {
+    id: 'T5',
+    name: 'FD Renewal Imminent (15 Days)',
+    type: 'Event',
+    urgency: 'high',
+    timestamp: new Date(),
+    description: 'High-Yield Term Deposit (FD XXXX98012) of ₹12.50L matures in 15 days (9.0% p.a.). Action required: Confirm auto-renewal or roll-over instruction.'
   },
   {
     id: 'T2',
