@@ -608,7 +608,7 @@ export default function Dashboard() {
                           </div>
                           <div>
                             <p className="text-iob-slate/50">Allotment Branch</p>
-                            <p className="font-bold text-iob-slate">Worli Branch, Mumbai</p>
+                            <p className="font-bold text-iob-slate">{customerExtended.branch}</p>
                           </div>
                         </div>
                       </div>
@@ -956,12 +956,12 @@ export default function Dashboard() {
                         </div>
                         <div>
                           <p className="text-iob-slate/50 font-semibold uppercase">Allocation Branch</p>
-                          <p className="text-sm font-bold text-iob-slate">Worli Branch</p>
+                          <p className="text-sm font-bold text-iob-slate">{customerExtended.branch}</p>
                         </div>
                       </div>
                       <button 
                         onClick={() => {
-                          alert('Eligibility Confirmed: Special 25% discount on Locker rental allocated under Royal Privilege Savings Account for Astha Singh.');
+                          alert(`Eligibility Confirmed: Special 25% discount on Locker rental allocated under Royal Privilege Savings Account at ${customerExtended.branch} for Astha Singh.`);
                         }}
                         className="w-full bg-white border border-iob-blue text-iob-blue-accent hover:bg-iob-blue-light/20 py-2.5 rounded-lg font-bold transition-all text-xs uppercase tracking-wider cursor-pointer"
                       >
